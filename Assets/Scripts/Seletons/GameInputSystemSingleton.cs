@@ -1,0 +1,93 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class GameInputSystemSingleton : MonoBehaviour
+{
+    private PlayerInputActions _actions;
+
+    public event EventHandler OnDashAction;
+    public static GameInputSystemSingleton Instance { get; private set; }
+
+    public event EventHandler<OnItemInventoryPressedEventArgs> OnItemInventory;
+
+    public class OnItemInventoryPressedEventArgs : EventArgs
+    {
+        public int indexInventory;
+    }
+
+    public event EventHandler<OnAttackingPressedEventArgs> OnAttacking;
+    public class OnAttackingPressedEventArgs : EventArgs {
+        public bool PressAttacking;
+    }
+
+    private void Awake()
+    {
+        // If there is an instance, and it's not me, delete myself.
+
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+
+        _actions = new PlayerInputActions();
+        _actions.Movement.Enable();
+        _actions.Combat.Enable();
+        _actions.Inventory.Enable();
+        _actions.Combat.Attack.started += StartAttacking;
+        _actions.Combat.Attack.canceled += EndAttacking;
+
+
+        _actions.Combat.Dash.performed += Dash_Performed;
+        _actions.Inventory.Keyboard.performed += GetIndexInventory;
+    }
+
+    public void DisableMovementPlayer()
+    {
+        _actions.Movement.Disable();
+    }
+
+    private void EndAttacking(InputAction.CallbackContext context)
+    {
+        OnAttacking?.Invoke(this, new OnAttackingPressedEventArgs { PressAttacking = false });
+    }
+
+    private void StartAttacking(InputAction.CallbackContext context)
+    {
+        OnAttacking?.Invoke(this, new OnAttackingPressedEventArgs { PressAttacking = true });
+    }
+
+    private void GetIndexInventory(InputAction.CallbackContext context)
+    {
+        int index = (int)context.ReadValue<float>();
+        OnItemInventory?.Invoke(this, new OnItemInventoryPressedEventArgs { indexInventory = index });
+    }
+
+    private void Dash_Performed(InputAction.CallbackContext context)
+    {
+        OnDashAction?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void OnDestroy()
+    {
+        _actions.Combat.Attack.started -= StartAttacking;
+        _actions.Combat.Attack.canceled -= EndAttacking;
+        _actions.Combat.Dash.performed -= Dash_Performed;
+        _actions.Inventory.Keyboard.performed -= GetIndexInventory;
+        _actions.Dispose();
+    }
+
+    public Vector2 GetMovementVectorNormalized()
+    {
+        Vector2 inputVector = _actions.Movement.Move.ReadValue<Vector2>();
+
+        return inputVector;
+    }
+}
