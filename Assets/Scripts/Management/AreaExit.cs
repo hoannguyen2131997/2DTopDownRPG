@@ -12,7 +12,7 @@ public class AreaExit : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.GetComponent<Player>())
+        if(collision.gameObject.GetComponent<Character>())
         {
          
             SceneManagement.Instance.SetTransitionName(sceneTransitionName);

@@ -201,6 +201,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   heightY: 1.5
   popDuration: 0.5
+  healItem: 20
 --- !u!114 &8231556641801463029
 MonoBehaviour:
   m_ObjectHideFlags: 0

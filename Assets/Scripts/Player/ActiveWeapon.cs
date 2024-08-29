@@ -6,7 +6,7 @@ using UnityEngine;
 public class ActiveWeapon : Singleton<ActiveWeapon>
 {
     public MonoBehaviour CurrentActiveWeapon { get; private set; }
-
+    [SerializeField] private EventsPlayerManager eventsPlayerManager;
     private float timeBetweenAttacks;
     private bool attackButtonDown, isAttacking;
 
@@ -17,12 +17,12 @@ public class ActiveWeapon : Singleton<ActiveWeapon>
 
     private void Start()
     {
-        GameInputSystemSingleton.Instance.OnAttacking += Attack;
-
+        //GameInputSystemSingleton.Instance.OnAttacking += Attack;
+        eventsPlayerManager.OnPlayerAttack += Attack;
         AttackCooldown();
     }
 
-    private void Attack(object sender, GameInputSystemSingleton.OnAttackingPressedEventArgs e)
+    private void Attack(object sender, OnAttackPressedEventArgs e)
     {
         attackButtonDown = e.PressAttacking;
 
@@ -60,6 +60,7 @@ public class ActiveWeapon : Singleton<ActiveWeapon>
 
     private IEnumerator TimeBetweenAttacksRoutine()
     {
+        
         yield return new WaitForSeconds(timeBetweenAttacks);
         isAttacking = false;
     }

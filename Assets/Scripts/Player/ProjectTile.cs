@@ -23,26 +23,26 @@ public class ProjectTile : MonoBehaviour
         DetectFireDistance();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        EnemeHeal enemeHealth = collision.gameObject.GetComponent<EnemeHeal>();
-        Indestructible indestructible = collision.gameObject.GetComponent<Indestructible>();
-        PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    EnemeHeal enemeHealth = collision.gameObject.GetComponent<EnemeHeal>();
+    //    Indestructible indestructible = collision.gameObject.GetComponent<Indestructible>();
+    //    PlayerHealth player = collision.gameObject.GetComponent<PlayerHealth>();
 
-        if(!collision.isTrigger && (enemeHealth || indestructible || player))
-        {
-            if((player && isEnemyProjectile) || (enemeHealth && !isEnemyProjectile))
-            {
-                player?.TakeDamege(1, transform);
-                Instantiate(particleOnHitPrefabVFX, transform.position, transform.rotation);
-                Destroy(gameObject);
-            } else if (!collision.isTrigger && indestructible)
-            {
-                Instantiate(particleOnHitPrefabVFX, transform.position, transform.rotation);
-                Destroy(gameObject);
-            }
-        }
-    }
+    //    if(!collision.isTrigger && (enemeHealth || indestructible || player))
+    //    {
+    //        if((player && isEnemyProjectile) || (enemeHealth && !isEnemyProjectile))
+    //        {
+    //            player?.TakeDamege(1, transform);
+    //            Instantiate(particleOnHitPrefabVFX, transform.position, transform.rotation);
+    //            Destroy(gameObject);
+    //        } else if (!collision.isTrigger && indestructible)
+    //        {
+    //            Instantiate(particleOnHitPrefabVFX, transform.position, transform.rotation);
+    //            Destroy(gameObject);
+    //        }
+    //    }
+    //}
 
     private void DetectFireDistance()
     {

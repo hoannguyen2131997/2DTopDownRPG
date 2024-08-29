@@ -23,6 +23,7 @@ public class StandingState : State
         base.HandleInput();
 
         input = GameInputSystemSingleton.Instance.GetMovementVectorNormalized();
+        
     }
 
     public override void LogicUpdate()

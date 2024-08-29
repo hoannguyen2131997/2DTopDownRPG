@@ -18,7 +18,9 @@ public class Pickup : MonoBehaviour
     [SerializeField] private AnimationCurve animCurve;
     [SerializeField] private float heightY = 1.5f;
     [SerializeField] private float popDuration = 1f;
+    [SerializeField] private int healItem = 20;
 
+    private PlayerController playerController;
     private Vector3 moveDir;
     private Rigidbody2D rb;
 
@@ -57,7 +59,7 @@ public class Pickup : MonoBehaviour
 
     private void Update()
     {
-        Vector3 playerPos = Player.Instance.transform.position;
+        Vector3 playerPos = Character.Instance.transform.position;
 
         if(Vector3.Distance(transform.position, playerPos) < pickUpDistance )
         {
@@ -77,14 +79,13 @@ public class Pickup : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject
-            .GetComponent<Player>())
+        playerController = collision.gameObject.GetComponentInParent<PlayerController>();
+        if (playerController)
         {
-            DetectPickUpType();
+            DetectPickUpType(); 
             Destroy(gameObject);
         }
     }
-
     private void DetectPickUpType()
     {
         switch (pickUpType)
@@ -93,7 +94,7 @@ public class Pickup : MonoBehaviour
                 EconomManager.Instance.UpdateCurrentGold();
                 break;
             case PickUpType.HealthGlobe:
-                PlayerHealth.Instance.HealPlayer();
+                playerController.HealPlayer(healItem);
                 break;
             case PickUpType.StaminaGlobe:
                 Stamina.Instance.RefreshStamina();

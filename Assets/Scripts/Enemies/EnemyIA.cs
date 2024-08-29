@@ -9,6 +9,7 @@ public class EnemyIA : MonoBehaviour
     [SerializeField] private MonoBehaviour enemyType;
     [SerializeField] private float attackCooldown = 2f;
     [SerializeField] private bool stopMovingWhileAttacking = false;
+    [SerializeField] private int damegeToPlayer = 10;
 
     private bool canAttack = true;
 
@@ -24,6 +25,10 @@ public class EnemyIA : MonoBehaviour
     private State state;
     private EnemyPathFinding enemyPathFinding;
 
+    public int GetDamegeEneme()
+    {
+        return damegeToPlayer;
+    }
     private void Awake()
     {
         enemyPathFinding = GetComponent<EnemyPathFinding>();
@@ -56,7 +61,7 @@ public class EnemyIA : MonoBehaviour
 
         enemyPathFinding.MoveTo(roamPosition);
 
-        if(Vector2.Distance(transform.position, Player.Instance.transform.position) < attackRange) {
+        if(Vector2.Distance(transform.position, Character.Instance.transform.position) < attackRange) {
             state = State.Attacking;
         }
 
@@ -68,7 +73,7 @@ public class EnemyIA : MonoBehaviour
 
     private void Attacking()
     {
-        if(Vector2.Distance(transform.position, Player.Instance.transform.position) > attackRange)
+        if(Vector2.Distance(transform.position, Character.Instance.transform.position) > attackRange)
         {
             state = State.Roaming;
         }

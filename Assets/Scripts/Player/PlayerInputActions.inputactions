@@ -13,6 +13,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "MoveJoystick",
+                    "type": "Value",
+                    "id": "1f3b0647-ad04-43e6-af7f-4d27c7cb0e36",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -70,6 +79,17 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "338c0cc3-7a4a-4b39-90d1-68091d590e66",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveJoystick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -90,6 +110,15 @@
                     "name": "Dash",
                     "type": "Button",
                     "id": "5f916a23-318e-45b5-ba3c-985c1668e39e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "AttackMobile",
+                    "type": "Button",
+                    "id": "36b3a0c5-a75c-442f-85c0-17b0555059ae",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -116,6 +145,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f2d8a480-c9e6-4cbf-b4b9-8f6b105086c4",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AttackMobile",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

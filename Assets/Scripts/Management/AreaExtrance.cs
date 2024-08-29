@@ -10,7 +10,7 @@ public class AreaExtrance : MonoBehaviour
     {
         if(transtionName == SceneManagement.Instance.SceneTransitionName)
         {
-            Player.Instance.transform.position = this.transform.position;
+            Character.Instance.transform.position = this.transform.position;
             CameraController.Instance.SetPlayerCameraFollow();
             UIFade.Instance.FadeToClear();
         }

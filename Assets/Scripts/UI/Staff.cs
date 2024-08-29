@@ -40,7 +40,7 @@ public class Staff : MonoBehaviour, IWeapon
     private void MouseFollowWithOffset()
     {
         Vector3 mousePos = Input.mousePosition;
-        Vector3 playerScreenPoint = Camera.main.WorldToScreenPoint(Player.Instance.transform.position);
+        Vector3 playerScreenPoint = Camera.main.WorldToScreenPoint(Character.Instance.transform.position);
 
         float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg;
 

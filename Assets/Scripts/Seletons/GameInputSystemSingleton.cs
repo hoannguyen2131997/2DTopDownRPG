@@ -20,9 +20,12 @@ public class GameInputSystemSingleton : MonoBehaviour
     }
 
     public event EventHandler<OnAttackingPressedEventArgs> OnAttacking;
-    public class OnAttackingPressedEventArgs : EventArgs {
+    public class OnAttackingPressedEventArgs : EventArgs
+    {
         public bool PressAttacking;
     }
+
+    [SerializeField] private EventsPlayerManager eventsPlayerManager;
 
     private void Awake()
     {
@@ -41,9 +44,14 @@ public class GameInputSystemSingleton : MonoBehaviour
         _actions.Movement.Enable();
         _actions.Combat.Enable();
         _actions.Inventory.Enable();
-        _actions.Combat.Attack.started += StartAttacking;
-        _actions.Combat.Attack.canceled += EndAttacking;
+        //_actions.Combat.Attack.started += StartAttacking;
+        //_actions.Combat.Attack.canceled += EndAttacking;
 
+        //_actions.Combat.AttackMobile.started += StartAttacking;
+        //_actions.Combat.AttackMobile.canceled += EndAttacking;
+
+        _actions.Combat.AttackMobile.started += eventsPlayerManager.StartAttackingPlayer;
+        _actions.Combat.AttackMobile.canceled += eventsPlayerManager.EndAttackingPlayer;
 
         _actions.Combat.Dash.performed += Dash_Performed;
         _actions.Inventory.Keyboard.performed += GetIndexInventory;
@@ -54,15 +62,15 @@ public class GameInputSystemSingleton : MonoBehaviour
         _actions.Movement.Disable();
     }
 
-    private void EndAttacking(InputAction.CallbackContext context)
-    {
-        OnAttacking?.Invoke(this, new OnAttackingPressedEventArgs { PressAttacking = false });
-    }
+    //private void EndAttacking(InputAction.CallbackContext context)
+    //{
+    //    OnAttacking?.Invoke(this, new OnAttackingPressedEventArgs { PressAttacking = false });
+    //}
 
-    private void StartAttacking(InputAction.CallbackContext context)
-    {
-        OnAttacking?.Invoke(this, new OnAttackingPressedEventArgs { PressAttacking = true });
-    }
+    //private void StartAttacking(InputAction.CallbackContext context)
+    //{
+    //    OnAttacking?.Invoke(this, new OnAttackingPressedEventArgs { PressAttacking = true });
+    //}
 
     private void GetIndexInventory(InputAction.CallbackContext context)
     {
@@ -77,8 +85,15 @@ public class GameInputSystemSingleton : MonoBehaviour
 
     private void OnDestroy()
     {
-        _actions.Combat.Attack.started -= StartAttacking;
-        _actions.Combat.Attack.canceled -= EndAttacking;
+        //_actions.Combat.Attack.started -= StartAttacking;
+        //_actions.Combat.Attack.canceled -= EndAttacking;
+
+        //_actions.Combat.AttackMobile.started -= StartAttacking;
+        //_actions.Combat.AttackMobile.canceled -= EndAttacking;
+
+        _actions.Combat.AttackMobile.started -= eventsPlayerManager.StartAttackingPlayer;
+        _actions.Combat.AttackMobile.canceled -= eventsPlayerManager.EndAttackingPlayer;
+
         _actions.Combat.Dash.performed -= Dash_Performed;
         _actions.Inventory.Keyboard.performed -= GetIndexInventory;
         _actions.Dispose();
@@ -87,7 +102,11 @@ public class GameInputSystemSingleton : MonoBehaviour
     public Vector2 GetMovementVectorNormalized()
     {
         Vector2 inputVector = _actions.Movement.Move.ReadValue<Vector2>();
-
+        Vector2 inputVectorJoystick = _actions.Movement.MoveJoystick.ReadValue<Vector2>();
+        if(inputVectorJoystick != Vector2.zero)
+        {
+            inputVector = inputVectorJoystick;
+        }
         return inputVector;
     }
 }

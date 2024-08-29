@@ -27,7 +27,7 @@ public class EnemeHeal : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        knockBack.GetKnockedBack(Player.Instance.transform, knockBackThrust);
+        //knockBack.GetKnockedBack(Character.Instance.transform, knockBackThrust);
         StartCoroutine(flash.FlashRoutine());
         StartCoroutine(CheckDetectDeathRoutine());
     }
