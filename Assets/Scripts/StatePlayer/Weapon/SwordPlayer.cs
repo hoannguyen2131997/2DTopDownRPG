@@ -59,7 +59,23 @@ public class SwordPlayer : MonoBehaviour, IWeapon
     {
         Vector2 inputPlayer = GameInputSystemSingleton.Instance.GetMovementVectorNormalized();
 
-        if (inputPlayer.x > 0)
+        if (inputPlayer.y > 0.1 && inputPlayer.x > 0)
+        {
+            // top right
+            ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, 0, 135);
+            weaponCollider.gameObject.transform.rotation = Quaternion.Euler(0, 0, 90);
+            rotationFlash = new Vector3(0, 0, 90);
+            gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+        } 
+        else if (inputPlayer.x > 0 && inputPlayer.y < -0.1 || inputPlayer.x < 0 && inputPlayer.y < -0.1)
+        {
+            // Down Right
+            ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, 0, -135);
+            weaponCollider.gameObject.transform.rotation = Quaternion.Euler(0, 0, 270);
+            rotationFlash = new Vector3(0, 0, -90);
+            gameObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
+        }
+        else if (inputPlayer.x > 0)
         {
             // Right
             ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, 0, 45);
@@ -78,19 +94,20 @@ public class SwordPlayer : MonoBehaviour, IWeapon
         else if (inputPlayer.y > 0)
         {
             // Up - order 1
-            ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0,0,135);
+            ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, 0, 135);
             weaponCollider.gameObject.transform.rotation = Quaternion.Euler(0, 0, 90);
             rotationFlash = new Vector3(0, 0, 90);
             gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
-        } 
+        }
         else if (inputPlayer.y < 0)
         {
             // Down
-            ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0,0,-135);
+            ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, 0, -135);
             weaponCollider.gameObject.transform.rotation = Quaternion.Euler(0, 0, 270);
             rotationFlash = new Vector3(0, 0, -90);
             gameObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
         }
+        
     }
 
     public void SwingUpFlipAnim()
