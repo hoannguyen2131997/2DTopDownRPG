@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  knockBackThrustAmount: 2
+  knockBackThrustAmount: 1
   damageRecoveryTime: 1
   playerUI: {fileID: 4114393009818351781}
   playerToSave: {fileID: 8155384650014291900}

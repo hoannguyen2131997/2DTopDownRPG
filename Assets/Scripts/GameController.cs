@@ -1,22 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    public Animator transition;
+
+    public float transitionTime = 1f;
     private void Awake()
     {
         Application.targetFrameRate = 1000;
     }
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
-        
+        StartCoroutine(LoadLevel());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator LoadLevel()
     {
-        
+        transition.SetTrigger("EndCrossFade");
+        yield return new WaitForSeconds(transitionTime);
     }
 }
