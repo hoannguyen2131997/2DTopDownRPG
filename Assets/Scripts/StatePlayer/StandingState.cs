@@ -29,14 +29,17 @@ public class StandingState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
-        character._animator.SetFloat(KeyPlayer._horizontal, input.x);
-        character._animator.SetFloat(KeyPlayer._vertical, input.y);
-
-        if(input != Vector2.zero)
+        
+        if(!character.IsBlockAnimation)
         {
-            character._animator.SetFloat(KeyPlayer._lastHorizontal, input.x);
-            character._animator.SetFloat(KeyPlayer._lastVertical, input.y);
+            character._animator.SetFloat(KeyPlayer._horizontal, input.x);
+            character._animator.SetFloat(KeyPlayer._vertical, input.y);
+
+            if (input != Vector2.zero)
+            {
+                character._animator.SetFloat(KeyPlayer._lastHorizontal, input.x);
+                character._animator.SetFloat(KeyPlayer._lastVertical, input.y);
+            }
         }
     }
 

@@ -24,6 +24,7 @@ public class Character : Singleton<Character>
     // Values to use
     public StateMachine movementSM;
     public StandingState standing;
+    public bool IsBlockAnimation;
 
     protected override void Awake()
     {

@@ -6,6 +6,12 @@ public class EventsPlayerManager: MonoBehaviour
 {
     public event EventHandler<OnTakeDamePressedEventArgs> OnPlayerTakeDame;
     public event EventHandler<OnAttackPressedEventArgs> OnPlayerAttack;
+    public event EventHandler<OnBlockControlPlayerEventArgs> OnBlockControlPlayer;
+
+    public void SetBlockControlPlayer(bool isBlockPlayer)
+    {
+        OnBlockControlPlayer?.Invoke(this, new OnBlockControlPlayerEventArgs { IsBlockControlPlayer = isBlockPlayer });
+    }
 
     public void EndAttackingPlayer(InputAction.CallbackContext context)
     {
@@ -31,4 +37,9 @@ public class OnTakeDamePressedEventArgs : EventArgs
 public class OnAttackPressedEventArgs : EventArgs
 {
     public bool PressAttacking;
+}
+
+public class OnBlockControlPlayerEventArgs : EventArgs
+{
+    public bool IsBlockControlPlayer;
 }

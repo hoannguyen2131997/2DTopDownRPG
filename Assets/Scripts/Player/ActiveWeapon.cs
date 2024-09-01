@@ -9,6 +9,7 @@ public class ActiveWeapon : Singleton<ActiveWeapon>
     [SerializeField] private EventsPlayerManager eventsPlayerManager;
     private float timeBetweenAttacks;
     private bool attackButtonDown, isAttacking;
+    private bool isBlockWeapon;
 
     protected override void Awake()
     {
@@ -19,17 +20,26 @@ public class ActiveWeapon : Singleton<ActiveWeapon>
     {
         //GameInputSystemSingleton.Instance.OnAttacking += Attack;
         eventsPlayerManager.OnPlayerAttack += Attack;
+        eventsPlayerManager.OnBlockControlPlayer += OnBlockWeapon;
         AttackCooldown();
+    }
+
+    private void OnBlockWeapon(object sender, OnBlockControlPlayerEventArgs e)
+    {
+        isBlockWeapon = e.IsBlockControlPlayer;
     }
 
     private void Attack(object sender, OnAttackPressedEventArgs e)
     {
-        attackButtonDown = e.PressAttacking;
-
-        if (attackButtonDown && !isAttacking && CurrentActiveWeapon)
+        if(!isBlockWeapon)
         {
-            AttackCooldown();
-            (CurrentActiveWeapon as IWeapon).Attack();
+            attackButtonDown = e.PressAttacking;
+
+            if (attackButtonDown && !isAttacking && CurrentActiveWeapon)
+            {
+                AttackCooldown();
+                (CurrentActiveWeapon as IWeapon).Attack();
+            }
         }
     }
 

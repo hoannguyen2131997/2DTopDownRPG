@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float damageRecoveryTime = 1f;
     [SerializeField] private PlayerUI playerUI;
     [SerializeField] private DataPlayerToSave playerToSave;
+    [SerializeField] private Character character;
     public EventsPlayerManager eventsPlayerManager;
 
     public bool isDead { get; private set; }
@@ -19,6 +21,8 @@ public class PlayerController : MonoBehaviour
     private Flash flash;
     readonly int DEATH_HASH = Animator.StringToHash("Death");
     const string TOWN_TEXT = "Scene1";
+    private bool isBlockAttackPlayer;
+
 
     private void Awake()
     {
@@ -31,6 +35,13 @@ public class PlayerController : MonoBehaviour
         currentHealth = maxHealth;
         playerUI.UpdateHealthSlider(maxHealth, currentHealth);
         eventsPlayerManager.OnPlayerTakeDame += UpdateDataPlayerHealth;
+        eventsPlayerManager.OnBlockControlPlayer += OnBlockControlPlayer;
+    }
+
+    private void OnBlockControlPlayer(object sender, OnBlockControlPlayerEventArgs e)
+    {
+        isBlockAttackPlayer = e.IsBlockControlPlayer;
+        character.IsBlockAnimation = e.IsBlockControlPlayer;
     }
 
     private void LoadDataPlayer()

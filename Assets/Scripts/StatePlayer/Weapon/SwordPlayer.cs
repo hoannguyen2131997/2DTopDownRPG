@@ -57,57 +57,59 @@ public class SwordPlayer : MonoBehaviour, IWeapon
 
     private void WeaponFollowPlayer()
     {
-        Vector2 inputPlayer = GameInputSystemSingleton.Instance.GetMovementVectorNormalized();
+        if (!GameInputSystemSingleton.Instance.isBlockInput)
+        {
+            Vector2 inputPlayer = GameInputSystemSingleton.Instance.GetMovementVectorNormalized();
 
-        if (inputPlayer.y > 0.1 && inputPlayer.x > 0)
-        {
-            // top right
-            ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, 0, 135);
-            weaponCollider.gameObject.transform.rotation = Quaternion.Euler(0, 0, 90);
-            rotationFlash = new Vector3(0, 0, 90);
-            gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
-        } 
-        else if (inputPlayer.x > 0 && inputPlayer.y < -0.1 || inputPlayer.x < 0 && inputPlayer.y < -0.1)
-        {
-            // Down Right
-            ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, 0, -135);
-            weaponCollider.gameObject.transform.rotation = Quaternion.Euler(0, 0, 270);
-            rotationFlash = new Vector3(0, 0, -90);
-            gameObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
+            if (inputPlayer.y > 0.1 && inputPlayer.x > 0)
+            {
+                // top right
+                ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, 0, 135);
+                weaponCollider.gameObject.transform.rotation = Quaternion.Euler(0, 0, 90);
+                rotationFlash = new Vector3(0, 0, 90);
+                gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            }
+            else if (inputPlayer.x > 0 && inputPlayer.y < -0.1 || inputPlayer.x < 0 && inputPlayer.y < -0.1)
+            {
+                // Down Right
+                ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, 0, -135);
+                weaponCollider.gameObject.transform.rotation = Quaternion.Euler(0, 0, 270);
+                rotationFlash = new Vector3(0, 0, -90);
+                gameObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
+            }
+            else if (inputPlayer.x > 0)
+            {
+                // Right
+                ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, 0, 45);
+                weaponCollider.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+                rotationFlash = new Vector3(0, 0, 0);
+                gameObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
+            }
+            else if (inputPlayer.x < 0)
+            {
+                // Left order 1
+                ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, 0, -225);
+                weaponCollider.gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
+                rotationFlash = new Vector3(0, 0, -180);
+                gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            }
+            else if (inputPlayer.y > 0)
+            {
+                // Up - order 1
+                ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, 0, 135);
+                weaponCollider.gameObject.transform.rotation = Quaternion.Euler(0, 0, 90);
+                rotationFlash = new Vector3(0, 0, 90);
+                gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
+            }
+            else if (inputPlayer.y < 0)
+            {
+                // Down
+                ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, 0, -135);
+                weaponCollider.gameObject.transform.rotation = Quaternion.Euler(0, 0, 270);
+                rotationFlash = new Vector3(0, 0, -90);
+                gameObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
+            }
         }
-        else if (inputPlayer.x > 0)
-        {
-            // Right
-            ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, 0, 45);
-            weaponCollider.gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
-            rotationFlash = new Vector3(0, 0, 0);
-            gameObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
-        }
-        else if (inputPlayer.x < 0)
-        {
-            // Left order 1
-            ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, 0, -225);
-            weaponCollider.gameObject.transform.rotation = Quaternion.Euler(0, 0, 180);
-            rotationFlash = new Vector3(0, 0, -180);
-            gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
-        }
-        else if (inputPlayer.y > 0)
-        {
-            // Up - order 1
-            ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, 0, 135);
-            weaponCollider.gameObject.transform.rotation = Quaternion.Euler(0, 0, 90);
-            rotationFlash = new Vector3(0, 0, 90);
-            gameObject.GetComponent<SpriteRenderer>().sortingOrder = 0;
-        }
-        else if (inputPlayer.y < 0)
-        {
-            // Down
-            ActiveWeapon.Instance.transform.rotation = Quaternion.Euler(0, 0, -135);
-            weaponCollider.gameObject.transform.rotation = Quaternion.Euler(0, 0, 270);
-            rotationFlash = new Vector3(0, 0, -90);
-            gameObject.GetComponent<SpriteRenderer>().sortingOrder = 1;
-        }
-        
     }
 
     public void SwingUpFlipAnim()
