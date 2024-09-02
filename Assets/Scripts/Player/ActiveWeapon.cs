@@ -6,21 +6,33 @@ using UnityEngine;
 public class ActiveWeapon : Singleton<ActiveWeapon>
 {
     public MonoBehaviour CurrentActiveWeapon { get; private set; }
-    [SerializeField] private EventsPlayerManager eventsPlayerManager;
+    private EventsPlayerManager eventsPlayerManager;
     private float timeBetweenAttacks;
     private bool attackButtonDown, isAttacking;
     private bool isBlockWeapon;
 
+
     protected override void Awake()
     {
         base.Awake();
+     
+        eventsPlayerManager = GetComponentInParent<EventsPlayerManager>();
+
+
     }
 
     private void Start()
     {
         //GameInputSystemSingleton.Instance.OnAttacking += Attack;
-        eventsPlayerManager.OnPlayerAttack += Attack;
-        eventsPlayerManager.OnBlockControlPlayer += OnBlockWeapon;
+        if (eventsPlayerManager != null)
+        {
+            eventsPlayerManager.OnPlayerAttack += Attack;
+            eventsPlayerManager.OnBlockControlPlayer += OnBlockWeapon;
+        }
+        else
+        {
+            Debug.Log("event player manager is null ");
+        }
         AttackCooldown();
     }
 

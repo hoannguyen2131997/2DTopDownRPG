@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,16 +19,32 @@ public class SwordPlayer : MonoBehaviour, IWeapon
 
     private GameObject slashAnim;
     private Vector2 inputPlayer;
+    private GameInputSystemSingleton gameInputSystemSingleton;
+    private EventsPlayerManager eventsPlayerManager;
+    private bool isBlockControl;
+
     private void Awake()
     {
         m_Animator = GetComponent<Animator>();
+        gameInputSystemSingleton = GetComponentInParent<GameInputSystemSingleton>();
+        eventsPlayerManager = GetComponentInParent<EventsPlayerManager>();
+        if (gameInputSystemSingleton == null)
+        {
+            Debug.Log("gameInputSystemSingleton is null");
+        }
     }
 
     private void Start()
     {
         weaponCollider = Character.Instance.GetWeaponCollider();
        
-        inputPlayer = GameInputSystemSingleton.Instance.GetMovementVectorNormalized();
+        inputPlayer = gameInputSystemSingleton.GetMovementVectorNormalized();
+        eventsPlayerManager.OnBlockControlPlayer += GetBlockControl;
+    }
+
+    private void GetBlockControl(object sender, OnBlockControlPlayerEventArgs e)
+    {
+        isBlockControl = e.IsBlockControlPlayer;
     }
 
     public WeaponInfo GetWeaponInfo()
@@ -57,9 +74,9 @@ public class SwordPlayer : MonoBehaviour, IWeapon
 
     private void WeaponFollowPlayer()
     {
-        if (!GameInputSystemSingleton.Instance.isBlockInput)
+        if (!isBlockControl)
         {
-            Vector2 inputPlayer = GameInputSystemSingleton.Instance.GetMovementVectorNormalized();
+            Vector2 inputPlayer = gameInputSystemSingleton.GetMovementVectorNormalized();
 
             if (inputPlayer.y > 0.1 && inputPlayer.x > 0)
             {

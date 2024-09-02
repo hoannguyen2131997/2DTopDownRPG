@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class EventsPlayerManager: MonoBehaviour
+public class EventsPlayerManager : MonoBehaviour
 {
     public event EventHandler<OnTakeDamePressedEventArgs> OnPlayerTakeDame;
     public event EventHandler<OnAttackPressedEventArgs> OnPlayerAttack;

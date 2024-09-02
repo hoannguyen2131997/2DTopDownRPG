@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameController : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     public Animator transition;
 
     public float transitionTime = 1f;
+
     private void Awake()
     {
+        base.Awake();
         Application.targetFrameRate = 1000;
     }
 

@@ -8,7 +8,7 @@ using static GameInputSystemSingleton;
 public class GrapeLand : MonoBehaviour
 {
     private SpriteFace spriteFace;
-    private PlayerController playerController;
+    private EventsPlayerManager eventPlayerManager;
     [SerializeField] private int damegeToPlayer = 1;
 
     private void Awake()
@@ -25,10 +25,10 @@ public class GrapeLand : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        playerController = collision.gameObject.GetComponentInParent<PlayerController>();
-        if(playerController != null)
+        eventPlayerManager = collision.gameObject.GetComponentInParent<EventsPlayerManager>();
+        if(eventPlayerManager != null)
         {
-            playerController.eventsPlayerManager.GetDamegePlayer(damegeToPlayer);
+            eventPlayerManager.GetDamegePlayer(damegeToPlayer);
         }
     }
 

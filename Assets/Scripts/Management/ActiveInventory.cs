@@ -6,15 +6,22 @@ using UnityEngine;
 public class ActiveInventory : Singleton<ActiveInventory>
 {
     private int activeSlotIndexNum = 0;
+    private GameInputSystemSingleton gameInputSystemSingleton;
 
     protected override void Awake()
     {
         base.Awake();
+
+        gameInputSystemSingleton = GameObject.Find("Player").GetComponent<GameInputSystemSingleton>();
+        if(gameInputSystemSingleton == null)
+        {
+            Debug.Log("gameInputSystemSingleton is null");
+        }
     }
     // action
     private void Start()
     {
-        GameInputSystemSingleton.Instance.OnItemInventory += GameInput_OnToggleActiveHighlight;
+        gameInputSystemSingleton.OnItemInventory += GameInput_OnToggleActiveHighlight;
     }
 
     public void EquipStartingWeapon()

@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 553d73a6af95eb946aabf937327f439b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventsPlayerManager: {fileID: 8097134003300203549}
 --- !u!1 &1858024112452239776
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,6 +197,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4815687594157833326}
   - component: {fileID: 519470412944831812}
+  - component: {fileID: 1665053888482321058}
+  - component: {fileID: 7842041151908474285}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -218,8 +219,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7338880217257662123}
-  - {fileID: 8459150289699588346}
   - {fileID: 6538216541664856082}
   - {fileID: 4638742454542388983}
   m_Father: {fileID: 0}
@@ -239,98 +238,32 @@ MonoBehaviour:
   maxHealth: 100
   knockBackThrustAmount: 1
   damageRecoveryTime: 1
-  playerUI: {fileID: 4114393009818351781}
   playerToSave: {fileID: 8155384650014291900}
-  eventsPlayerManager: {fileID: 8097134003300203549}
---- !u!1 &7391590347966731299
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8459150289699588346}
-  - component: {fileID: 8097134003300203549}
-  m_Layer: 0
-  m_Name: EventsPlayerManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8459150289699588346
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7391590347966731299}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4815687594157833326}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8097134003300203549
+  playerUIPrefab: {fileID: 8629530186515004792}
+--- !u!114 &1665053888482321058
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7391590347966731299}
+  m_GameObject: {fileID: 6867702950151220376}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3dd70df30027a804586228f9cc18ae8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &8175931436795493834
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7338880217257662123}
-  - component: {fileID: 7640472277406126888}
-  m_Layer: 0
-  m_Name: GameInputSystemSingleton
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7338880217257662123
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8175931436795493834}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4815687594157833326}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7640472277406126888
+--- !u!114 &7842041151908474285
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8175931436795493834}
+  m_GameObject: {fileID: 6867702950151220376}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b026bd2a4ac3a6a4eb80c3f10aac7853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventsPlayerManager: {fileID: 8097134003300203549}
 --- !u!1 &8629530186515004792
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,6 +471,7 @@ MonoBehaviour:
   _animator: {fileID: 0}
   playerVelocity: {x: 0, y: 0}
   weaponCollider: {fileID: 2713037302629881699}
+  IsBlockAnimation: 0
 --- !u!114 &6338692125301472854
 MonoBehaviour:
   m_ObjectHideFlags: 0

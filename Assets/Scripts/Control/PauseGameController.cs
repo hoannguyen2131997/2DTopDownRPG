@@ -20,8 +20,8 @@ public class PauseGameController : MonoBehaviour
         Time.timeScale = 0;
         pauseGameBtn.gameObject.SetActive(false);
         playGameBtn.gameObject.SetActive(true);
-        eventPlayerManager = GameObject.Find("EventsPlayerManager").GetComponent<EventsPlayerManager>();
-        GameInputSystemSingleton.Instance.isBlockInput = true;
+        eventPlayerManager = GameObject.Find("Player").GetComponent<EventsPlayerManager>();
+       
         if (eventPlayerManager != null )
         {
             eventPlayerManager.SetBlockControlPlayer(true);
@@ -33,8 +33,8 @@ public class PauseGameController : MonoBehaviour
         Time.timeScale = 1;
         pauseGameBtn.gameObject.SetActive(true);
         playGameBtn.gameObject.SetActive(false);
-        eventPlayerManager = GameObject.Find("EventsPlayerManager").GetComponent<EventsPlayerManager>();
-        GameInputSystemSingleton.Instance.isBlockInput = false;
+        eventPlayerManager = GameObject.Find("Player").GetComponent<EventsPlayerManager>();
+
         if (eventPlayerManager != null)
         {
             eventPlayerManager.SetBlockControlPlayer(false);

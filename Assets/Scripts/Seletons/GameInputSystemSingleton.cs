@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,7 +7,7 @@ public class GameInputSystemSingleton : MonoBehaviour
     private PlayerInputActions _actions;
 
     public event EventHandler OnDashAction;
-    public static GameInputSystemSingleton Instance { get; private set; }
+    //public static GameInputSystemSingleton Instance { get; private set; }
 
     public event EventHandler<OnItemInventoryPressedEventArgs> OnItemInventory;
 
@@ -25,31 +22,30 @@ public class GameInputSystemSingleton : MonoBehaviour
         public bool PressAttacking;
     }
 
-    [SerializeField] private EventsPlayerManager eventsPlayerManager;
+    private EventsPlayerManager eventsPlayerManager;
 
     private void Awake()
     {
         // If there is an instance, and it's not me, delete myself.
 
-        if (Instance != null && Instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            Instance = this;
-        }
+        //if (Instance != null && Instance != this)
+        //{
+        //    Destroy(this);
+        //}
+        //else
+        //{
+        //    Instance = this;
+        //}
 
+        eventsPlayerManager = GetComponentInParent<EventsPlayerManager>();
         _actions = new PlayerInputActions();
         _actions.Movement.Enable();
         _actions.Combat.Enable();
         _actions.Inventory.Enable();
-        //_actions.Combat.Attack.started += StartAttacking;
-        //_actions.Combat.Attack.canceled += EndAttacking;
+    }
 
-        //_actions.Combat.AttackMobile.started += StartAttacking;
-        //_actions.Combat.AttackMobile.canceled += EndAttacking;
-
+    private void Start()
+    {
         _actions.Combat.AttackMobile.started += eventsPlayerManager.StartAttackingPlayer;
         _actions.Combat.AttackMobile.canceled += eventsPlayerManager.EndAttackingPlayer;
 
@@ -110,6 +106,4 @@ public class GameInputSystemSingleton : MonoBehaviour
         //Debug.Log("x:y " + inputVectorJoystick.x + " : " + inputVectorJoystick.y);
         return inputVector;
     }
-
-    public bool isBlockInput;
 }

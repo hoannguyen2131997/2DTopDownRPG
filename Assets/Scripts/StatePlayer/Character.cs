@@ -26,9 +26,21 @@ public class Character : Singleton<Character>
     public StandingState standing;
     public bool IsBlockAnimation;
 
+    private GameInputSystemSingleton gameInputSystemSingleton;
+
     protected override void Awake()
     {
         base.Awake();
+
+        gameInputSystemSingleton = GameObject.Find("Player").GetComponent<GameInputSystemSingleton>();
+        if (gameInputSystemSingleton == null)
+        {
+            Debug.Log("gameInputSystemSingleton is null");
+        }
+    }
+    public Vector2 GetEvent()
+    {
+        return gameInputSystemSingleton.GetMovementVectorNormalized();
     }
     private void Start()
     {

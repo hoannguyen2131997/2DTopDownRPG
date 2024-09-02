@@ -22,7 +22,7 @@ public class StandingState : State
     {
         base.HandleInput();
 
-        input = GameInputSystemSingleton.Instance.GetMovementVectorNormalized();
+        input = character.GetEvent();
         
     }
 

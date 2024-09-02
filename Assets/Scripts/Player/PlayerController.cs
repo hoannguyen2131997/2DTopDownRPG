@@ -9,10 +9,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int maxHealth = 3;
     [SerializeField] private float knockBackThrustAmount = 10f;
     [SerializeField] private float damageRecoveryTime = 1f;
-    [SerializeField] private PlayerUI playerUI;
     [SerializeField] private DataPlayerToSave playerToSave;
-    [SerializeField] private Character character;
-    public EventsPlayerManager eventsPlayerManager;
+    [SerializeField] private GameObject playerUIPrefab;
+
+    private GameInputSystemSingleton gameInputSystemSingleton;
+    private EventsPlayerManager eventsPlayerManager;
+
+    private PlayerUI playerUI;
+    private Character character;
 
     public bool isDead { get; private set; }
     private int currentHealth;
@@ -23,11 +27,14 @@ public class PlayerController : MonoBehaviour
     const string TOWN_TEXT = "Scene1";
     private bool isBlockAttackPlayer;
 
-
     private void Awake()
     {
         flash = gameObject.GetComponentInChildren<Flash>();
         knockBack = gameObject.GetComponentInChildren<KnockBack>();
+        playerUI = playerUIPrefab.GetComponent<PlayerUI>();
+        character = playerUIPrefab.GetComponent<Character>();
+        eventsPlayerManager = GetComponent<EventsPlayerManager>();
+        gameInputSystemSingleton = GetComponent<GameInputSystemSingleton>();
     }
 
     private void Start()
@@ -82,38 +89,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //public void TakeDamege()
-    //{
-    //    StartCoroutine(flash.FlashRoutine());
-    //    eventsPlayerManager.GetDamegePlayer(enemyIA.GetDamegeEneme());
-    //}
-
     public void HealPlayer(int _healItem)
     {
         currentHealth += _healItem;
         if (currentHealth > maxHealth)
         {
             currentHealth = maxHealth;
-            //UpdateHealthSlider();
         }
 
         playerUI.UpdateHealthSlider(maxHealth,currentHealth);
     }
-
-    //public void TakeDamege(int damageAmount, Transform hitTransform)
-    //{
-    //    if (!canTakeDamege) { return; }
-
-    //    ScreenSnackManager.Instance.ShakeSreen();
-    //    knockBack.GetKnockedBack(hitTransform, knockBackThrustAmount);
-    //    StartCoroutine(flash.FlashRoutine());
-    //    canTakeDamege = false;
-    //    currentHealth -= damageAmount;
-    //    StartCoroutine(DamageRecoveryRoutine());
-    //    //UpdateHealthSlider();
-    //    playerUI.UpdateHealthSlider(maxHealth, currentHealth);
-    //    CheckIfPlayerDeath();
-    //}
 
     private void CheckIfPlayerDeath()
     {
