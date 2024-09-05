@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +8,8 @@ public class EventsPlayerManager : MonoBehaviour
     public event EventHandler<OnTakeDamePressedEventArgs> OnPlayerTakeDame;
     public event EventHandler<OnAttackPressedEventArgs> OnPlayerAttack;
     public event EventHandler<OnBlockControlPlayerEventArgs> OnBlockControlPlayer;
+    public event EventHandler<OnUpdateInventoryPlayerEventArgs> OnUpdateInventoryPlayer;
+    public event EventHandler<OnShowInventoryPopupPlayerEventArgs> OnShowInventoryPopupPlayer;
 
     public void SetBlockControlPlayer(bool isBlockPlayer)
     {
@@ -27,6 +30,16 @@ public class EventsPlayerManager : MonoBehaviour
     {
         OnPlayerTakeDame?.Invoke(this, new OnTakeDamePressedEventArgs { DamageTaken = damege });
     }
+
+    public void GetDataInventoryPlayer(DataItemInventory dataItemInventory)
+    {
+        OnUpdateInventoryPlayer?.Invoke(this, new OnUpdateInventoryPlayerEventArgs { DataItemInventory = dataItemInventory });
+    }
+
+    public void GetDataListItemInventory(List<DataItemInventory> _DataItemInventoryList)
+    {
+        OnShowInventoryPopupPlayer?.Invoke(this, new OnShowInventoryPopupPlayerEventArgs { DataItemInventoryList = _DataItemInventoryList });
+    }
 }
 
 public class OnTakeDamePressedEventArgs : EventArgs
@@ -42,4 +55,14 @@ public class OnAttackPressedEventArgs : EventArgs
 public class OnBlockControlPlayerEventArgs : EventArgs
 {
     public bool IsBlockControlPlayer;
+}
+
+public class OnUpdateInventoryPlayerEventArgs : EventArgs
+{
+    public DataItemInventory DataItemInventory;
+}
+
+public class OnShowInventoryPopupPlayerEventArgs : EventArgs
+{
+    public List<DataItemInventory> DataItemInventoryList;
 }

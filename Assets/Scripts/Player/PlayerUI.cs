@@ -23,5 +23,12 @@ public class PlayerUI : MonoBehaviour
     {
         EnemyIA enemyIA = collision.gameObject.GetComponent<EnemyIA>();
         transform.parent.GetComponent<PlayerController>().CollisionDetected(enemyIA);
+
+        InventoryController inventoryController = transform.parent.GetComponent<InventoryController>();
+        if (inventoryController != null && collision.gameObject.GetComponent<Item>() != null)
+        {
+            inventoryController.dataItemInventories.Add(collision.gameObject.GetComponent<Item>().GetItem());
+            Destroy(collision.gameObject);
+        }
     }
 }
