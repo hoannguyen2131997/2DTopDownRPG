@@ -15,7 +15,6 @@ public class PauseGameController : MonoBehaviour
     private void Start()
     {
         pauseGameBtn.onClick.AddListener(OnPauseGame);
-        //playGameBtn.onClick.AddListener(OnPlayGame);
         PopupManager.Instance.onPauseGame += SetOnPauseGameBtn;
     }
 
@@ -37,35 +36,6 @@ public class PauseGameController : MonoBehaviour
 
     private void OnPauseGame()
     {
-        PopupManager.Instance.SetPauseGame(true);
         PopupManager.Instance.SetPopupPause(true);
     }
-
-    //private void OnPauseGame()
-    //{
-    //    //Time.timeScale = 0;
-    //    //pauseGameBtn.gameObject.SetActive(false);
-    //    //playGameBtn.gameObject.SetActive(true);
-    //    //eventPlayerManager = GameObject.Find("Player").GetComponent<EventsPlayerManager>();
-
-    //    //if (eventPlayerManager != null)
-    //    //{
-    //    //    eventPlayerManager.SetBlockControlPlayer(true);
-    //    //}
-
-    //    //PopupManager.Instance.SetPopupPause(true);
-    //}
-
-    //private void OnPlayGame()
-    //{
-    //    Time.timeScale = 1;
-    //    pauseGameBtn.gameObject.SetActive(true);
-    //    playGameBtn.gameObject.SetActive(false);
-    //    eventPlayerManager = GameObject.Find("Player").GetComponent<EventsPlayerManager>();
-
-    //    if (eventPlayerManager != null)
-    //    {
-    //        eventPlayerManager.SetBlockControlPlayer(false);
-    //    }
-    //}
 }

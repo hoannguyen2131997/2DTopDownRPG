@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 519470412944831812}
   - component: {fileID: 1665053888482321058}
   - component: {fileID: 7842041151908474285}
-  - component: {fileID: 845024598681442387}
+  - component: {fileID: 8748099635840194312}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -265,7 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b026bd2a4ac3a6a4eb80c3f10aac7853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &845024598681442387
+--- !u!114 &8748099635840194312
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -409,7 +409,7 @@ Animator:
   m_GameObject: {fileID: 8629530186515004792}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5e44d27861161a0488d5968979dc005b, type: 2}
+  m_Controller: {fileID: 22100000, guid: 84e59ae9dfddddf40b7b961bf1189ece, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

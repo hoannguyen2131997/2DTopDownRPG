@@ -23,7 +23,6 @@ public class PauseGameUI : MonoBehaviour
 
     private void BackGamePlay()
     {
-        PopupManager.Instance.SetPauseGame(false);
         PopupManager.Instance.SetPopupPause(false);
     }
 }

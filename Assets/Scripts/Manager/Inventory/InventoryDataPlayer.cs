@@ -3,26 +3,20 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class InventoryController : MonoBehaviour
+public class InventoryDataPlayer : MonoBehaviour
 {
     public List<DataItemInventory> dataItemInventories = new List<DataItemInventory>();
 
     private EventsPlayerManager eventsPlayerManager;
     private InventoryPopupUI inventoryPopupUI;
+
     private void Awake()
     {
         eventsPlayerManager = GetComponent<EventsPlayerManager>();
-        inventoryPopupUI = GameObject.Find("InventoryScreen").GetComponent<InventoryPopupUI>();
-
-
     }
-    private void Start()
-    {        
-       
-    }
-    public void ShowPopupInventoryUI()
+
+    public void GetDataItemInventoryToShow()
     {
-        PopupManager.Instance.SetPopupInventory(true);
         eventsPlayerManager.GetDataListItemInventory(dataItemInventories);
     }
 }

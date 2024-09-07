@@ -11,21 +11,16 @@ public class InventoryPopupUI : MonoBehaviour
 
     private bool menuActivated;
     private EventsPlayerManager playerManager;
-    private InventoryController inventoryController;
-    private PlayerController playerController;
-    private List<DataItemInventory> dataItemInventories = new List<DataItemInventory>();
-
+ 
     private void Awake()
     {
         playerManager = GameObject.Find("Player").GetComponent<EventsPlayerManager>();
-        inventoryController = GameObject.Find("Player").GetComponent<InventoryController>();
-        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     private void Start()
     {
         exitBtn.onClick.AddListener(ExitInventory);
-        if(playerManager == null || inventoryController == null)
+        if(playerManager == null)
         {
             Debug.Log("Not find player");
         }
@@ -35,20 +30,16 @@ public class InventoryPopupUI : MonoBehaviour
 
     private void ShowInventoryPopupPlayer(object sender, OnShowInventoryPopupPlayerEventArgs e)
     {
-        PopupManager.Instance.SetPauseGame(true);
-        playerManager.SetBlockControlPlayer(true);
-        dataItemInventories = e.DataItemInventoryList;
-        Debug.Log("inventory: " + dataItemInventories.Count);
-        for (int i = 0; i < dataItemInventories.Count; i++)
+        //Debug.Log("inventory: " + e.DataItemInventoryList.Count);
+        for (int i = 0; i < e.DataItemInventoryList.Count; i++)
         {
-            itemSlotsList[i].AddItem(dataItemInventories[i].itemName, dataItemInventories[i].itemQuantity, dataItemInventories[i].itemSprite);
+            itemSlotsList[i].AddItem(e.DataItemInventoryList[i].itemName, e.DataItemInventoryList[i].itemQuantity, e.DataItemInventoryList[i].itemSprite);
         }
     }
 
     private void ExitInventory()
     {
         PopupManager.Instance.SetPopupInventory(false);
-        PopupManager.Instance.SetPauseGame(false);
         playerManager.SetBlockControlPlayer(false);
     }
 }

@@ -21,7 +21,13 @@ public class EconomManager : Singleton<EconomManager>
 
         if(goldText == null)
         {
-            goldText = GameObject.Find(COIN_AMOUNT_TEXT).GetComponent<TMP_Text>();
+            //goldText = GameObject.Find(COIN_AMOUNT_TEXT).GetComponent<TMP_Text>();
+            goldText = EventUIForPlayer.Instance.GoldText;
+
+            if(goldText == null)
+            {
+                Debug.Log("goldText is null");
+            }
         }
 
         goldText.text = currentGold.ToString("D3");
