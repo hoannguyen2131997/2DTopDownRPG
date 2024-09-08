@@ -103,7 +103,8 @@ public class GameInputSystemSingleton : MonoBehaviour
         {
             inputVector = inputVectorJoystick;
         }
-        //Debug.Log("x:y " + inputVectorJoystick.x + " : " + inputVectorJoystick.y);
+       
+        //Debug.Log("x:y " + inputVector.x + " : " + inputVector.y);
         return inputVector;
     }
 }

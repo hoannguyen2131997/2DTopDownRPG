@@ -10,6 +10,7 @@ public class EventUIForPlayer : Singleton<EventUIForPlayer>
 {
     public TMP_Text GoldText;
     public Button inventoryBtn;
+    public Slider healthSliderPlayer;
 
     protected override void Awake()
     {

@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 2308099317377683790}
   - component: {fileID: 3560887690959151605}
   - component: {fileID: 8099309644464172118}
+  - component: {fileID: 4150435079843476799}
   m_Layer: 0
   m_Name: Grape
   m_TagString: Untagged
@@ -174,6 +175,7 @@ MonoBehaviour:
   enemyType: {fileID: 8099309644464172118}
   attackCooldown: 2
   stopMovingWhileAttacking: 0
+  damegeToPlayer: 10
 --- !u!114 &5066536560139516636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,6 +280,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grapeProjectilePrefab: {fileID: 8958835322403490760, guid: b71333c8b6fff0e4bb1cc5e9a0d76165, type: 3}
+--- !u!114 &4150435079843476799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300370696377620920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92c775235fbda2a458e9983e99b9027f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5413441746239621582
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,18 +5,17 @@ using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
 {
-    const string HEALTH_SLIDER_TEXT = "HealSliderPlayer";
-    private Slider healthSlider;
-
     public void UpdateHealthSlider(int _maxHealth, int _currentHealth)
     {
-        if (healthSlider == null)
+        if(EventUIForPlayer.Instance.healthSliderPlayer != null)
         {
-            healthSlider = GameObject.Find(HEALTH_SLIDER_TEXT).GetComponent<Slider>();
+            EventUIForPlayer.Instance.healthSliderPlayer.maxValue = _maxHealth;
+            EventUIForPlayer.Instance.healthSliderPlayer.value = _currentHealth;
+        } else
+        {
+            Debug.Log("Heal player not find");
         }
-
-        healthSlider.maxValue = _maxHealth;
-        healthSlider.value = _currentHealth;
+        
     }
 
     private void OnCollisionStay2D(Collision2D collision)

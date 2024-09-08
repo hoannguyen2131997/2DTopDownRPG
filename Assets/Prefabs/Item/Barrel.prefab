@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7809740668799615334}
   - component: {fileID: 5415619383662175144}
   - component: {fileID: -2427336966041944458}
+  - component: {fileID: -8939661789716952645}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
@@ -150,3 +151,15 @@ MonoBehaviour:
   goinCoinPrefab: {fileID: 6312029009393855888, guid: 48a90ff9402bdf345bcf59d714b8610e, type: 3}
   healthGlobePrefab: {fileID: 6312029009393855888, guid: f75236a6f7587df48b15e35b597209b0, type: 3}
   staminaGlobePrefab: {fileID: 6312029009393855888, guid: e424b860c8f212741904814c406e6a25, type: 3}
+--- !u!114 &-8939661789716952645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230833535351986490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92c775235fbda2a458e9983e99b9027f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
