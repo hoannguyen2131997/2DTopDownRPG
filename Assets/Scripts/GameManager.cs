@@ -12,7 +12,7 @@ public class GameManager : Singleton<GameManager>
     private void Awake()
     {
         base.Awake();
-        Application.targetFrameRate = 1000;
+        Application.targetFrameRate = 30;
     }
 
     private void Start()

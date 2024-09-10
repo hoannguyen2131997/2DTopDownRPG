@@ -11,6 +11,8 @@ public class EventUIForPlayer : Singleton<EventUIForPlayer>
     public TMP_Text GoldText;
     public Button inventoryBtn;
     public Slider healthSliderPlayer;
+    public Button InterstitialBtn;
+    public Button RewardedBtn;
 
     protected override void Awake()
     {
@@ -21,6 +23,18 @@ public class EventUIForPlayer : Singleton<EventUIForPlayer>
     private void Start()
     {
         inventoryBtn.onClick.AddListener(ShowInventory);
+        InterstitialBtn.onClick.AddListener(ShowInterstitialAds);
+        RewardedBtn.onClick.AddListener(ShowRewardedAds);
+    }
+
+    private void ShowInterstitialAds()
+    {
+       AdsManager.Instance.ShowInterstitialAd();
+    }
+
+    private void ShowRewardedAds()
+    {
+        AdsManager.Instance.ShowRewardedAd();
     }
 
     private void ShowInventory()
