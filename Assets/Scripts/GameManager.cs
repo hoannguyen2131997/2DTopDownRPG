@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -12,7 +12,8 @@ public class GameManager : Singleton<GameManager>
     private void Awake()
     {
         base.Awake();
-        Application.targetFrameRate = 1000;
+        Application.targetFrameRate = 30;
+        QualitySettings.vSyncCount = 0;  // Tắt VSync
     }
 
     private void Start()

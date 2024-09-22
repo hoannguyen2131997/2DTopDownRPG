@@ -12,13 +12,16 @@ public class TilemapCulling : MonoBehaviour
     private Vector3Int maxVisibleTile;
 
     public List<Tilemap> tiles; // Tilemap mà bạn muốn culling
-
+    private Vector3 lastCameraPosition;
     void Start()
     {
         if (mainCamera == null)
         {
             mainCamera = Camera.main;   // Nếu chưa chỉ định, tự động lấy camera chính
         }
+
+        // Lưu vị trí ban đầu của camera
+        lastCameraPosition = mainCamera.transform.position;
     }
 
     void Update()
@@ -28,7 +31,10 @@ public class TilemapCulling : MonoBehaviour
             for(int i = 0; i < tiles.Count; i++)
             {
                 CullingTilemap(tiles[i]);
+               
             }
+            // Cập nhật vị trí mới của camera
+            lastCameraPosition = mainCamera.transform.position;
         }
     }
 

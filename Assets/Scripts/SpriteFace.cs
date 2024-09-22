@@ -5,13 +5,7 @@ using UnityEngine;
 public class SpriteFace : MonoBehaviour
 {
     [SerializeField] private float fadeTime = .4f;
-
-    private SpriteRenderer spriteRenderer;
-
-    private void Awake()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();    
-    }
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     public IEnumerator SlowFadeRoutine()
     {
@@ -26,6 +20,6 @@ public class SpriteFace : MonoBehaviour
             yield return null;
         }
 
-        Destroy(gameObject);
+        this.gameObject.SetActive(false);
     }
 }

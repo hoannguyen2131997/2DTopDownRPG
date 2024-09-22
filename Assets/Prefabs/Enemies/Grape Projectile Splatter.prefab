@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 2347416181040569625}
   - component: {fileID: 6067042172749406898}
   - component: {fileID: 1526986583746895903}
-  - component: {fileID: 7081107562734900295}
-  - component: {fileID: 1087263669556682985}
   m_Layer: 0
   m_Name: Grape Projectile Splatter
   m_TagString: Untagged
@@ -122,29 +120,3 @@ CapsuleCollider2D:
   m_Offset: {x: 0.041771278, y: -0.16449049}
   m_Size: {x: 1.5144644, y: 0.7898679}
   m_Direction: 1
---- !u!114 &7081107562734900295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4727065486428609112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74fd222de1a9f6c43b6c820b74b037cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fadeTime: 0.6
---- !u!114 &1087263669556682985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4727065486428609112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09777984942eae047a859418c12704cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damegeToPlayer: 10

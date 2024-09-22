@@ -26,7 +26,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6473812773198700429
 Transform:
@@ -176,6 +176,7 @@ MonoBehaviour:
   attackCooldown: 2
   stopMovingWhileAttacking: 0
   damegeToPlayer: 10
+  rangeCheckAttackableObjects: 2
 --- !u!114 &5066536560139516636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,6 +281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grapeProjectilePrefab: {fileID: 8958835322403490760, guid: b71333c8b6fff0e4bb1cc5e9a0d76165, type: 3}
+  bulletExclusionSto: {fileID: 11400000, guid: 9e3be99c7747fa34f8eb14368677a623, type: 2}
 --- !u!114 &4150435079843476799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,7 +309,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7816415827618181389
 Transform:

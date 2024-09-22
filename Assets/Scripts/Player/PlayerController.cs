@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
 
     private GameInputSystemSingleton gameInputSystemSingleton;
     private EventsPlayerManager eventsPlayerManager;
+    private InventoryDataPlayer inventoryDataPlayer;
 
     private PlayerUI playerUI;
     private Character character;
@@ -21,11 +22,13 @@ public class PlayerController : MonoBehaviour
     public bool isDead { get; private set; }
     private int currentHealth;
     private bool canTakeDamege = true;
+    private bool canTakeDamageBullet = true;
     private KnockBack knockBack;
     private Flash flash;
     readonly int DEATH_HASH = Animator.StringToHash("Death");
     const string TOWN_TEXT = "Scene1";
     private bool isBlockAttackPlayer;
+    private Rigidbody2D rb;
 
     private void Awake()
     {
@@ -35,6 +38,8 @@ public class PlayerController : MonoBehaviour
         character = playerUIPrefab.GetComponent<Character>();
         eventsPlayerManager = GetComponent<EventsPlayerManager>();
         gameInputSystemSingleton = GetComponent<GameInputSystemSingleton>();
+        rb = GetComponentInChildren<Rigidbody2D>();
+        inventoryDataPlayer = GetComponent<InventoryDataPlayer>();
     }
 
     private void Start()
@@ -76,17 +81,13 @@ public class PlayerController : MonoBehaviour
     {
         if (!canTakeDamege) { return; }
 
-        if (enemyIA)
-        {
-            Transform transform = enemyIA.gameObject.transform;
-            ScreenSnackManager.Instance.ShakeSreen();
-            knockBack.GetKnockedBack(gameObject.transform, transform, knockBackThrustAmount);
-            StartCoroutine(flash.FlashRoutine());
-            canTakeDamege = false;
-            StartCoroutine(DamageRecoveryRoutine());
-            //CheckIfPlayerDeath();
-            eventsPlayerManager.GetDamegePlayer(enemyIA.GetDamegeEneme());
-        }
+        Transform transform = enemyIA.gameObject.transform;
+        ScreenSnackManager.Instance.ShakeSreen();
+        knockBack.GetKnockedBack(gameObject.transform, transform, knockBackThrustAmount);
+        StartCoroutine(flash.FlashRoutine());
+        canTakeDamege = false;
+        StartCoroutine(DamageRecoveryRoutine());
+        eventsPlayerManager.GetDamegePlayer(enemyIA.GetCollisionDamage());
     }
 
     public void HealPlayer(int _healItem)
@@ -123,5 +124,44 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(damageRecoveryTime);
         canTakeDamege = true;
+    }
+
+    public void HandleCollisionPlayerUI(Collision2D collision)
+    {
+        // Take damege
+        EnemyIA enemyIA = collision.gameObject.GetComponent<EnemyIA>();
+
+        if(enemyIA != null)
+        {
+            CollisionDetected(enemyIA);
+        }
+
+        // Get item
+        Item item = collision.gameObject.GetComponent<Item>();
+        if (inventoryDataPlayer != null && item != null)
+        {
+            inventoryDataPlayer.dataItemInventories.Add(collision.gameObject.GetComponent<Item>().GetItem());
+            Destroy(collision.gameObject);
+        }
+    }
+
+    public void HandleEnterTriggerPlayerUI(Collider2D collider)
+    {
+        if (collider.CompareTag("EnemyBullet") && canTakeDamageBullet)
+        {
+            GrapeProjectile bullet = collider.GetComponent<GrapeProjectile>();
+
+            if (bullet != null)
+            {
+                Debug.Log("Player bị trúng đạn từ enemy với damage: " + bullet.DamageToPlayer);
+                eventsPlayerManager.GetDamegePlayer((int)bullet.DamageToPlayer);
+                canTakeDamageBullet = false;
+            }
+        }
+
+    }
+    public void HandleExitTriggerPlayerUI(Collider2D collider)
+    {
+        canTakeDamageBullet = true;
     }
 }

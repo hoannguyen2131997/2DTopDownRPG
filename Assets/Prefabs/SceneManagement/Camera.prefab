@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 0, z: -10}
+  m_FollowOffset: {x: 0, y: 2, z: -10}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -171,10 +171,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 19.43208, y: 8.214838}
-      - {x: -20.328093, y: 8.149519}
-      - {x: -20.4956, y: -13.047733}
-      - {x: 19.21304, y: -14.35964}
+    - - {x: 43.01213, y: 8.968538}
+      - {x: -45.523216, y: 9.010891}
+      - {x: -44.708035, y: -63.7119}
+      - {x: 42.806015, y: -63.525757}
+      - {x: 42.900764, y: -18.02047}
   m_UseDelaunayMesh: 0
 --- !u!1 &5172052667136901710
 GameObject:
@@ -205,7 +206,7 @@ Transform:
   m_GameObject: {fileID: 5172052667136901710}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -0.97601223, y: 0.98958, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -243,7 +244,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 100
+  far clip plane: 400
   field of view: 34
   orthographic: 1
   orthographic size: 8
@@ -282,7 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RenderShadows: 1
+  m_RenderShadows: 0
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
@@ -293,7 +294,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 1
+  m_RenderPostProcessing: 0
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -410,7 +411,7 @@ Transform:
   m_GameObject: {fileID: 6890374256812142916}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.5487814, y: -0.14959475, z: -9.898026}
+  m_LocalPosition: {x: -5.524781, y: 0.9474052, z: -9.898026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -441,7 +442,7 @@ MonoBehaviour:
     FieldOfView: 34
     OrthographicSize: 8
     NearClipPlane: 0.3
-    FarClipPlane: 100
+    FarClipPlane: 400
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}

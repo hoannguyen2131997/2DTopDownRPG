@@ -37,16 +37,11 @@ public class PopupManager : Singleton<PopupManager>
 
     public void SetPopupInventory(bool _onInventory)
     {
-        // Get data
-        if(_onInventory)
-        {
-            inventoryController.GetDataItemInventoryToShow();
-        }
-
         // Pause game
         SetPauseGame(_onInventory);
 
         // Show UI
+        inventoryController.GetDataItemInventoryToShow();
         popupInventoryPrefab.SetActive(_onInventory);
     }
 
