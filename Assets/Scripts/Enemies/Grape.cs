@@ -42,7 +42,6 @@ public class Grape : MonoBehaviour, IEnemy
 
         GrapeProjectile grapeProjectile = bullet.AddComponent<GrapeProjectile>();
         grapeProjectile.Initialize(bulletExclusionSto);
-        //Instantiate(grapeProjectilePrefab, transform.position, Quaternion.identity);
     }
 }
 

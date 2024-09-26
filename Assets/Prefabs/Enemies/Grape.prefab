@@ -23,10 +23,10 @@ GameObject:
   - component: {fileID: 4150435079843476799}
   m_Layer: 0
   m_Name: Grape
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6473812773198700429
 Transform:
@@ -175,7 +175,7 @@ MonoBehaviour:
   enemyType: {fileID: 8099309644464172118}
   attackCooldown: 2
   stopMovingWhileAttacking: 0
-  damegeToPlayer: 10
+  collisionDamage: 10
   rangeCheckAttackableObjects: 2
 --- !u!114 &5066536560139516636
 MonoBehaviour:
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a602a18b42d23b4ebcb75bd7ee3b990, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 3
+  startingHealth: 1
   deathVFXPrefab: {fileID: 7602483294352672545, guid: 676422e1c3da21d44be3665b7e991aae, type: 3}
   knockBackThrust: 15
 --- !u!114 &2582682028670909031
@@ -309,7 +309,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7816415827618181389
 Transform:

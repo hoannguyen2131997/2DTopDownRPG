@@ -9,6 +9,7 @@ public class EnemeHeal : MonoBehaviour
     [SerializeField] private GameObject deathVFXPrefab;
     [SerializeField] private float knockBackThrust = 15f;
 
+    public bool IsDead { get; private set; }
     private int currentHealth;
     private KnockBack knockBack;
     private Flash flash;
@@ -44,7 +45,8 @@ public class EnemeHeal : MonoBehaviour
         {
             Instantiate(deathVFXPrefab, transform.position, Quaternion.identity);
             GetComponent<PickupSpawner>().DropItems();
-            Destroy(gameObject);
+            IsDead = true;
+            this.gameObject.SetActive(false);
         }
     }
 }

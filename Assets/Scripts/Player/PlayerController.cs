@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
         canTakeDamege = true;
     }
 
-    public void HandleCollisionPlayerUI(Collision2D collision)
+    public void HandleCollisionEnemy(Collision2D collision)
     {
         // Take damege
         EnemyIA enemyIA = collision.gameObject.GetComponent<EnemyIA>();
@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void HandleEnterTriggerPlayerUI(Collider2D collider)
+    public void HandleEnterTriggerBullet(Collider2D collider)
     {
         if (collider.CompareTag("EnemyBullet") && canTakeDamageBullet)
         {
@@ -160,7 +160,7 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-    public void HandleExitTriggerPlayerUI(Collider2D collider)
+    public void HandleExitTriggerBullet(Collider2D collider)
     {
         canTakeDamageBullet = true;
     }

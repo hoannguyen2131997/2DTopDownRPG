@@ -20,7 +20,7 @@ public class PlayerUI : MonoBehaviour
             EventUIForPlayer.Instance.healthSliderPlayer.value = _currentHealth;
         } else
         {
-            Debug.Log("Heal player not find");
+            Debug.Log("Error - Heal player not find");
         }
         
     }
@@ -29,10 +29,10 @@ public class PlayerUI : MonoBehaviour
     {
         if(playerController != null)
         {
-            playerController.HandleCollisionPlayerUI(collision);
+            playerController.HandleCollisionEnemy(collision);
         } else
         {
-            Debug.Log("PlayerController not find!");
+            Debug.Log("Error - PlayerController not find!");
         }
     }
 
@@ -40,11 +40,11 @@ public class PlayerUI : MonoBehaviour
     {
         if (playerController != null)
         {
-            playerController.HandleEnterTriggerPlayerUI(collider);
+            playerController.HandleEnterTriggerBullet(collider);
         }
         else
         {
-            Debug.Log("PlayerController not find!");
+            Debug.Log("Error - PlayerController not find!");
         }
     }
 
@@ -52,11 +52,11 @@ public class PlayerUI : MonoBehaviour
     {
         if (playerController != null)
         {
-            playerController.HandleExitTriggerPlayerUI(collider);
+            playerController.HandleExitTriggerBullet(collider);
         }
         else
         {
-            Debug.Log("PlayerController not find!");
+            Debug.Log("Error - PlayerController not find!");
         }
     }
 }

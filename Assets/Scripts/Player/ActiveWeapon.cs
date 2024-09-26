@@ -54,7 +54,7 @@ public class ActiveWeapon : Singleton<ActiveWeapon>
             }
         }
     }
-
+         
     public void ToggleIsAttacking(bool _isAttacking)
     {
         isAttacking = _isAttacking;

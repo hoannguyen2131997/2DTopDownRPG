@@ -12,7 +12,7 @@ public class EnemyIA : MonoBehaviour
     [SerializeField] private bool stopMovingWhileAttacking = false;
     [SerializeField] private int collisionDamage = 10;
     [SerializeField] private int rangeCheckAttackableObjects = 2;
-   
+
     private enum State
     {
         Roaming,
@@ -25,7 +25,8 @@ public class EnemyIA : MonoBehaviour
     private State state;
     private EnemyPathFinding enemyPathFinding;
     private Tilemap map;
-
+    private float timeCheck = 0.2f;
+    private float timeDelta;
     public int GetCollisionDamage()
     {
         return collisionDamage;
@@ -39,13 +40,19 @@ public class EnemyIA : MonoBehaviour
     private void Start()
     {
         map = MapData.Instance.GetMap();
-       
+
         roamPosition = GetRoamingPosition();
     }
 
     private void Update()
     {
-        CheckForAttackableObjects();
+        timeDelta += Time.deltaTime;
+        if (timeDelta > timeCheck)
+        {
+            timeDelta = 0f;
+            CheckForAttackableObjects();
+        }
+        
         MovementStateControl();
     }
 
@@ -75,19 +82,14 @@ public class EnemyIA : MonoBehaviour
         // Chuyển đổi vị trí ô lưới sang tọa độ thế giới (world position)
         Vector3 worldPosition = map.CellToWorld(cellPosition);
 
-        // Kích thước ô lưới
-        Vector2 cellSize = map.cellSize;
+        // Kiểm tra đối tượng có collider trong bán kính xung quanh vị trí kẻ địch
+        RaycastHit2D hit = Physics2D.CircleCast(worldPosition, rangeCheckAttackableObjects, Vector2.zero);
 
-        // Kiểm tra đối tượng có collider trong ô lưới đó
-        Collider2D[] colliders = Physics2D.OverlapBoxAll(worldPosition, cellSize, 0);
-        foreach (Collider2D collider in colliders)
+        if (hit.collider != null && hit.collider.CompareTag("Player"))
         {
-            // Kiểm tra nếu đối tượng này có tag là "Player"
-            if (collider.CompareTag("Player"))
-            {
-                return collider.gameObject;  // Trả về đối tượng người chơi
-            }
+            return hit.collider.gameObject;  // Trả về đối tượng người chơi
         }
+
         return null;  // Không có đối tượng trong ô lưới
     }
 

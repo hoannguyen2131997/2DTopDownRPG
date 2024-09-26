@@ -8,7 +8,9 @@ public class ObjectPool : Singleton<ObjectPool>
     public GameObject prefab; // Đối tượng cần pool (ví dụ: đạn)
     public int poolSize = 10; // Số lượng đối tượng trong pool
     [SerializeField] private Transform ListBulletCircleParent;
-    private Queue<GameObject> poolObjects = new Queue<GameObject>(); // Hàng đợi lưu trữ các đối tượng trong pool
+    private GameObject[] poolObjects; // Mảng lưu trữ các đối tượng trong pool
+    private int currentIndex = 0;     // Biến theo dõi chỉ số của đối tượng được lấy
+
 #if UNITY_EDITOR
     [SerializeField]
     private bool showGizmos;  // Hiển thị trên Inspector
@@ -28,38 +30,44 @@ public class ObjectPool : Singleton<ObjectPool>
     // Khởi tạo pool khi game bắt đầu
     void Start()
     {
+        poolObjects = new GameObject[poolSize]; // Khởi tạo mảng
         for (int i = 0; i < poolSize; i++)
         {
             GameObject obj = Instantiate(prefab); // Tạo đối tượng mới
             obj.transform.parent = ListBulletCircleParent.transform;
             obj.tag = "EnemyBullet";
             obj.SetActive(false); // Ẩn đối tượng khi chưa sử dụng
-            poolObjects.Enqueue(obj); // Thêm vào pool
+            poolObjects[i] = obj; // Thêm đối tượng vào mảng
         }
     }
 
     // Lấy đối tượng từ pool
     public GameObject GetFromPool()
     {
-        if (poolObjects.Count > 0)
+        // Duyệt qua mảng để tìm đối tượng không được kích hoạt
+        for (int i = 0; i < poolSize; i++)
         {
-            GameObject obj = poolObjects.Dequeue(); // Lấy đối tượng từ hàng đợi
-            obj.SetActive(true); // Kích hoạt đối tượng
-            return obj;
+            // Tính toán chỉ số của đối tượng hiện tại (để vòng lặp)
+            int index = (currentIndex + i) % poolSize;
+
+            // Nếu đối tượng không được kích hoạt (inactive)
+            if (!poolObjects[index].activeInHierarchy)
+            {
+                poolObjects[index].SetActive(true); // Kích hoạt đối tượng
+                currentIndex = (index + 1) % poolSize; // Cập nhật chỉ số hiện tại
+                return poolObjects[index]; // Trả về đối tượng đã kích hoạt
+            }
         }
-        else
-        {
-            // Nếu pool rỗng, tạo thêm đối tượng mới
-            GameObject obj = Instantiate(prefab);
-            obj.SetActive(true);
-            return obj;
-        }
+
+        // Nếu tất cả các đối tượng trong pool đều đang được sử dụng, có thể mở rộng logic tại đây.
+        Debug.LogWarning("All objects in pool are currently in use!");
+        return null;
     }
 
     // Trả đối tượng về pool
     public void ReturnToPool(GameObject obj)
     {
         obj.SetActive(false); // Ẩn đối tượng
-        poolObjects.Enqueue(obj); // Thêm đối tượng vào lại hàng đợi
+        // Đối tượng đã trở lại pool, nhưng không cần thay đổi chỉ số currentIndex.
     }
 }

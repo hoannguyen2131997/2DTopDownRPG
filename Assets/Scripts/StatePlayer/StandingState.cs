@@ -32,11 +32,18 @@ public class StandingState : State
 
         foreach (IsAttack enemy in enemies)
         {
+            //float distanceToEnemy = Vector3.Distance(character.gameObject.transform.position, enemy.transform.position);
+            //if (distanceToEnemy < shortestDistance)
+            //{
+            //    shortestDistance = distanceToEnemy;
+            //    nearestEnemy = enemy.transform;
+            //}
+
             float distanceToEnemy = Vector3.Distance(character.gameObject.transform.position, enemy.transform.position);
-            if (distanceToEnemy < shortestDistance)
+            if (distanceToEnemy <= attackRange)
             {
-                shortestDistance = distanceToEnemy;
-                nearestEnemy = enemy.transform;
+                AttackEnemy();
+                return;
             }
         }
     }
@@ -49,7 +56,7 @@ public class StandingState : State
             var item = GameObject.FindObjectOfType<SwordPlayer>();
             //character.gameObject.transform.rotation = Quaternion.Euler(nearestEnemy.position - character.gameObject.transform.position).normalized;
             item.Attack();
-            Debug.Log("Tấn công kẻ thù: " + nearestEnemy.name);
+            //Debug.Log("Tấn công kẻ thù: " + nearestEnemy.name);
             // Thêm logic tấn công ở đây (ví dụ: trừ máu kẻ thù)
             lastAttackTime = Time.time;
         }
@@ -73,25 +80,25 @@ public class StandingState : State
             }
         }
 
-        raycastTimer += Time.deltaTime;
+        //raycastTimer += Time.deltaTime;
 
-        // Nếu đã qua thời gian raycastInterval thì thực hiện Raycast
-        if (raycastTimer >= raycastInterval)
-        {
-            FindNearestEnemy();
-            raycastTimer = 0f; // Đặt lại bộ đếm
-        }
-      
+        //// Nếu đã qua thời gian raycastInterval thì thực hiện Raycast
+        //if (raycastTimer >= raycastInterval)
+        //{
+        //    FindNearestEnemy();
+        //    raycastTimer = 0f; // Đặt lại bộ đếm
+        //}
 
-        // Tấn công nếu kẻ thù nằm trong phạm vi
-        if (nearestEnemy != null)
-        {
-            float distanceToEnemy = Vector3.Distance(character.gameObject.transform.position, nearestEnemy.position);
-            if (distanceToEnemy <= attackRange)
-            {
-                AttackEnemy();
-            }
-        }
+
+        //// Tấn công nếu kẻ thù nằm trong phạm vi
+        //if (nearestEnemy != null)
+        //{
+        //    float distanceToEnemy = Vector3.Distance(character.gameObject.transform.position, nearestEnemy.position);
+        //    if (distanceToEnemy <= attackRange)
+        //    {
+        //        AttackEnemy();
+        //    }
+        //}
     }
 
     public override void PhysicsUpdate()

@@ -26,7 +26,7 @@ public class GrapeProjectile : MonoBehaviour
         Vector3 playerPos = Character.Instance.transform.position;
         Vector3 grapeShadowStartPostion = shadow.transform.position;
 
-        StartCoroutine(ProjectileCurveRoutine(transform.position, playerPos, data));
+        StartCoroutine(ProjectileCurveRoutine(this.transform.position, playerPos, data));
         StartCoroutine(MoveGrapeShadowRoutine(shadow.gameObject, grapeShadowStartPostion, playerPos, data));
     }
 
