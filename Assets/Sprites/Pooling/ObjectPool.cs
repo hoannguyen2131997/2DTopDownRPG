@@ -44,6 +44,11 @@ public class ObjectPool : Singleton<ObjectPool>
     // Lấy đối tượng từ pool
     public GameObject GetFromPool()
     {
+        if(currentIndex == poolSize - 1)
+        {
+            currentIndex = 0;
+        }
+
         // Duyệt qua mảng để tìm đối tượng không được kích hoạt
         for (int i = 0; i < poolSize; i++)
         {
@@ -67,6 +72,17 @@ public class ObjectPool : Singleton<ObjectPool>
     // Trả đối tượng về pool
     public void ReturnToPool(GameObject obj)
     {
+       
+        GrapeProjectile grapeProjectile = obj.GetComponent<GrapeProjectile>();
+        obj.GetComponent<SpriteRenderer>().sprite = null;
+        // Lấy tất cả CircleCollider2D trên GameObject
+
+        if (grapeProjectile != null)
+        {
+            Destroy(grapeProjectile);
+        }
+
+
         obj.SetActive(false); // Ẩn đối tượng
         // Đối tượng đã trở lại pool, nhưng không cần thay đổi chỉ số currentIndex.
     }

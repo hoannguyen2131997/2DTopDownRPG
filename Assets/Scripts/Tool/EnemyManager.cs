@@ -67,11 +67,15 @@ public class EnemyManager : Singleton<EnemyManager>
         {
             Vector3 enemyPosition = enemy.transform.position;
             EnemeHeal enemeHeal = enemy.GetComponent<EnemeHeal>();
+            if(enemeHeal.IsDead)
+            {
+                continue;
+            }
             // Nếu kẻ địch nằm trong vùng camera + vùng đệm thì kích hoạt, nếu không thì tắt
             if (enemyPosition.x > leftBound && enemyPosition.x < rightBound &&
                 enemyPosition.y > bottomBound && enemyPosition.y < topBound)
             {
-                if (!enemy.activeSelf && !enemeHeal.IsDead)
+                if (!enemy.activeSelf)
                 {
                     enemy.SetActive(true);  // Kích hoạt nếu đang bị tắt
                 }

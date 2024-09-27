@@ -50,10 +50,16 @@ public class GrapeProjectile : MonoBehaviour
 
     private void ResetDataToPool()
     {
-        shadow = null;
-        renderer = null;
-        StopAllCoroutines();
+
+        renderer.material.color = initialColor;
+        CircleCollider2D collider = this.gameObject.GetComponent<CircleCollider2D>();
+        if(collider != null)
+        {
+            Destroy(collider);
+        }
+       
         ObjectPool.Instance.ReturnToPool(this.gameObject);
+       
     }
 
     private IEnumerator ProjectileCurveRoutine(Vector3 startPosition, Vector3 endPosition, BulletExclusion data)
@@ -85,10 +91,14 @@ public class GrapeProjectile : MonoBehaviour
 #endif
 
         // Thêm CircleCollider2D khi phát nổ
-        CircleCollider2D explosionCollider = gameObject.AddComponent<CircleCollider2D>();
-        explosionCollider.isTrigger = true;  // Đặt Collider là Trigger để phát hiện va chạm mà không ngăn cản đối tượng khác
-        explosionCollider.radius = _data.ExplosionRadius;  // Đặt bán kính của vụ nổ
-
+        CircleCollider2D explosionCollider = gameObject.GetComponent<CircleCollider2D>();
+        if(explosionCollider == null )
+        {
+            explosionCollider = gameObject.AddComponent<CircleCollider2D>();
+            explosionCollider.isTrigger = true;  // Đặt Collider là Trigger để phát hiện va chạm mà không ngăn cản đối tượng khác
+            explosionCollider.radius = _data.ExplosionRadius;  // Đặt bán kính của vụ nổ
+        }
+        
         StartCoroutine(Fade(_data.EventDurationExplosion));
     }
 
