@@ -57,7 +57,7 @@ public class GrapeProjectile : MonoBehaviour
         {
             Destroy(collider);
         }
-       
+        StopAllCoroutines();
         ObjectPool.Instance.ReturnToPool(this.gameObject);
        
     }

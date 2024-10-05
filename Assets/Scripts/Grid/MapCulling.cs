@@ -6,7 +6,9 @@ public class MapCulling : MonoBehaviour
     public float padding = 2f;    // Khoảng đệm (padding)
 
     private SpriteRenderer[] childRenderers; // Mảng chứa các Renderer của các đối tượng con
- 
+    private float timeCur;
+    [SerializeField] private float timeCheck = 1f;
+
     void Start()
     {
         if (mainCamera == null)
@@ -16,11 +18,16 @@ public class MapCulling : MonoBehaviour
 
         // Lấy tất cả các Renderer của các đối tượng con
         childRenderers = GetComponentsInChildren<SpriteRenderer>();
+        CameraController.Instance.SetPlayerCameraFollow();
     }
 
     void Update()
     {
-        CullingChildObjects();
+        timeCur += Time.deltaTime;
+        if(timeCur > timeCheck)
+        {
+            CullingChildObjects();
+        }
     }
 
     void CullingChildObjects()

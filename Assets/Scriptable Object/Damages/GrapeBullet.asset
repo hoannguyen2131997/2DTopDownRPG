@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31b82a2961ff6244bb263efda3f50a0b, type: 3}
   m_Name: GrapeBullet
   m_EditorClassIdentifier: 
-  Damage: 20
+  Damage: 5
   Speed: 2
-  ExplosionRadius: 0.5
+  ExplosionRadius: 0.3
   TrajectoryType: 1
   SpriteSplatter: {fileID: 21300000, guid: 355556bfdc3148648acad462c0faf5dd, type: 3}
   CurvedData:
@@ -54,4 +54,4 @@ MonoBehaviour:
       m_RotationOrder: 4
     heightY: 5.5
   SpriteBullet: {fileID: 21300000, guid: 707fbd95a59c64e4390654a294db1db2, type: 3}
-  EventDurationExplosion: 2
+  EventDurationExplosion: 0.5

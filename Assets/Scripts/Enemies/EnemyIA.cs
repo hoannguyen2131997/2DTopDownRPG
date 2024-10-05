@@ -11,7 +11,6 @@ public class EnemyIA : MonoBehaviour
     [SerializeField] private float attackCooldown = 2f;
     [SerializeField] private bool stopMovingWhileAttacking = false;
     [SerializeField] private int collisionDamage = 10;
-    [SerializeField] private int rangeCheckAttackableObjects = 2;
 
     private enum State
     {
@@ -24,9 +23,7 @@ public class EnemyIA : MonoBehaviour
     private float timeRoaming = 0f;
     private State state;
     private EnemyPathFinding enemyPathFinding;
-    private Tilemap map;
-    private float timeCheck = 0.2f;
-    private float timeDelta;
+
     public int GetCollisionDamage()
     {
         return collisionDamage;
@@ -39,58 +36,12 @@ public class EnemyIA : MonoBehaviour
 
     private void Start()
     {
-        map = MapData.Instance.GetMap();
-
         roamPosition = GetRoamingPosition();
     }
 
     private void Update()
     {
-        timeDelta += Time.deltaTime;
-        if (timeDelta > timeCheck)
-        {
-            timeDelta = 0f;
-            CheckForAttackableObjects();
-        }
-        
         MovementStateControl();
-    }
-
-    private void CheckForAttackableObjects()
-    {
-        Vector3Int enemyCellPosition = map.WorldToCell(this.transform.position);
-        //Debug.Log("enemyCellPosition :" + enemyCellPosition.x + " " + enemyCellPosition.y);
-
-        for (int x = - rangeCheckAttackableObjects; x <= rangeCheckAttackableObjects; x++)
-        {
-            for (int y = -rangeCheckAttackableObjects; y <= rangeCheckAttackableObjects; y++)
-            {
-                Vector3Int neighborCell = enemyCellPosition + new Vector3Int(x, y, 0);
-
-                //Kiểm tra nếu có đối tượng hoặc người chơi trong ô này
-                GameObject obj = CheckObjectInCell(neighborCell);
-                if (obj != null)
-                {
-                    // Thực hiện hành động khi tìm thấy đối tượng (như người chơi)
-                }
-            }
-        }
-    }
-
-    private GameObject CheckObjectInCell(Vector3Int cellPosition)
-    {
-        // Chuyển đổi vị trí ô lưới sang tọa độ thế giới (world position)
-        Vector3 worldPosition = map.CellToWorld(cellPosition);
-
-        // Kiểm tra đối tượng có collider trong bán kính xung quanh vị trí kẻ địch
-        RaycastHit2D hit = Physics2D.CircleCast(worldPosition, rangeCheckAttackableObjects, Vector2.zero);
-
-        if (hit.collider != null && hit.collider.CompareTag("Player"))
-        {
-            return hit.collider.gameObject;  // Trả về đối tượng người chơi
-        }
-
-        return null;  // Không có đối tượng trong ô lưới
     }
 
     private void MovementStateControl()

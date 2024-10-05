@@ -158,8 +158,8 @@ public class PlayerController : MonoBehaviour
                 canTakeDamageBullet = false;
             }
         }
-
     }
+
     public void HandleExitTriggerBullet(Collider2D collider)
     {
         canTakeDamageBullet = true;

@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Maps
+  m_EditorClassIdentifier: 
+  m_GroupName: Maps
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 5d911c39482fa9240805a9e4ce573af3
+  m_SerializeEntries:
+  - m_GUID: 37592effd3f1ccb4288d46ce8aea1126
+    m_Address: Assets/Prefabs/Maps/HellModeMap.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - HellMap
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 691834a4f5aedd84b808f90a982ec2ce
+    m_Address: Assets/Prefabs/Maps/EasyMap.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - EasyMap
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: d8ecdfab645deac42ab1f34e4ec0903c, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 71f3e6318d1941242adfd02ed5e022d8, type: 2}
+    - {fileID: 11400000, guid: 00c8c8dcecdaf3644b21178c83062721, type: 2}

@@ -9,12 +9,16 @@ public class CameraController : Singleton<CameraController>
 
     private void Start()
     {
-        SetPlayerCameraFollow();
+        //SetPlayerCameraFollow();
     }
 
     public void SetPlayerCameraFollow()
     {
         _virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
         _virtualCamera.Follow = Character.Instance.transform;
+        if(_virtualCamera == null || Character.Instance.transform == null)
+        {
+            Debug.LogError("null");
+        }
     }
 }
