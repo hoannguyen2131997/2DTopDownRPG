@@ -45,8 +45,8 @@ MonoBehaviour:
   m_overridePlayerVersion: '[UnityEditor.PlayerSettings.bundleVersion]'
   m_GroupAssets:
   - {fileID: 11400000, guid: 187c6462daa85c24ebfcf473db0bea26, type: 2}
-  - {fileID: 11400000, guid: 3195dc4adfb3bf24aa19085a02706873, type: 2}
   - {fileID: 11400000, guid: 6d723cc256f9f9b4ba1b6b9f6639f2dd, type: 2}
+  - {fileID: 11400000, guid: 3195dc4adfb3bf24aa19085a02706873, type: 2}
   - {fileID: 11400000, guid: 087b824e05dd009429ecd393a33fe99f, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
@@ -91,6 +91,7 @@ MonoBehaviour:
     - default
     - HellMap
     - EasyMap
+    - Map
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: f99a9924f8dc1b84f8fe7835e8ba4e43, type: 2}

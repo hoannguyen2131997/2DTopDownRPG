@@ -21,13 +21,13 @@ MonoBehaviour:
     m_Address: Assets/Prefabs/Maps/HellModeMap.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
-    - HellMap
+    - Map
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 691834a4f5aedd84b808f90a982ec2ce
     m_Address: Assets/Prefabs/Maps/EasyMap.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
-    - EasyMap
+    - Map
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: d8ecdfab645deac42ab1f34e4ec0903c, type: 2}

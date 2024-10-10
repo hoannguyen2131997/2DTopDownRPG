@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,22 +7,32 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class SpawObjectAddressable : MonoBehaviour
 {
-    [SerializeField] private AssetLabelReference map;
-    [SerializeField] private Transform mapNormal;
+    [ReadOnly]
+    public string mapLabel; // Nhãn chung của các map
 
-    private void Start()
+    [SerializeField] private AssetReference objToLoad;
+    [SerializeField] private Transform parentTransform;
+
+    private AsyncOperationHandle<GameObject> handle;
+
+    public void LoadObjectAddressable()
     {
-        AsyncOperationHandle<GameObject> asyncOperationHandle = Addressables.LoadAssetAsync<GameObject>(map);
-        asyncOperationHandle.Completed += AsyncOperationHandle_Completed;
+        handle = Addressables.LoadAssetAsync<GameObject>(objToLoad);
+        handle.Completed += AsyncOperationHandle_Completed;
+    }
+
+    public void UnLoadAddressable()
+    {
+        Addressables.Release(handle);
     }
 
     private void AsyncOperationHandle_Completed(AsyncOperationHandle<GameObject> asyncOperationHandle)
     {
       if(asyncOperationHandle.Status == AsyncOperationStatus.Succeeded)
         {
-            GameObject mapObj = Instantiate(asyncOperationHandle.Result);
-            mapObj.transform.SetParent(mapNormal);
-            mapObj.transform.localPosition = Vector3.zero;
+            GameObject obj = Instantiate(asyncOperationHandle.Result);
+            obj.transform.SetParent(parentTransform);
+            obj.transform.localPosition = Vector3.zero;
         }
         else
         {
