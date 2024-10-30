@@ -6,6 +6,7 @@ using UnityEngine;
 public class CameraController : Singleton<CameraController>
 {
     private CinemachineVirtualCamera _virtualCamera;
+    [SerializeField] private Transform player;
 
     private void Start()
     {
@@ -15,10 +16,10 @@ public class CameraController : Singleton<CameraController>
     public void SetPlayerCameraFollow()
     {
         _virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
-        _virtualCamera.Follow = Character.Instance.transform;
-        if(_virtualCamera == null || Character.Instance.transform == null)
-        {
-            Debug.LogError("null");
-        }
+        _virtualCamera.Follow = player;
+        //if(_virtualCamera == null || Character.Instance.transform == null)
+        //{
+        //    Debug.LogError("null");
+        //}
     }
 }

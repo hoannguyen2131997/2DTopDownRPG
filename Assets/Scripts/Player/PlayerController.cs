@@ -56,18 +56,6 @@ public class PlayerController : MonoBehaviour
         character.IsBlockAnimation = e.IsBlockControlPlayer;
     }
 
-    private void LoadDataPlayer()
-    {
-        currentHealth = playerToSave.currentHeal;
-        maxHealth = playerToSave.maxHeal;
-    }
-
-    private void SaveDataPlayer()
-    {
-        playerToSave.UpdateCurrentHeal(currentHealth);
-        playerToSave.UpdateCurrentHeal(maxHealth);
-    }
-
     private void UpdateDataPlayerHealth(object sender, OnTakeDamePressedEventArgs e)
     {
         if (currentHealth != 0 || maxHealth != 0)

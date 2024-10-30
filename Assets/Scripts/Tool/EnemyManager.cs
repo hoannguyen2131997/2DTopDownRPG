@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class EnemyManager : Singleton<EnemyManager>
 {
+    [ReadOnly]
     [SerializeField] private float cameraBuffer = 6f;  // Vùng đệm tùy chỉnh
+    [SerializeField] private EnemySpawner enemySpawner;
+    [SerializeField] private float checkInterval = 1f;  // Kiểm tra mỗi 1 giây
+    [SerializeField] private float nextCheckTime = 0f;
+
     private Camera mainCamera;
     public GameObject[] enemies;  // Mảng các kẻ địch con
-    [SerializeField] private EnemySpawner enemySpawner;
-
     private int countListEnemy;
+    private Coroutine checkEnemiesCoroutine;
 
-    private float checkInterval = 1f;  // Kiểm tra mỗi 1 giây
-    private float nextCheckTime = 0f;
     protected override void Awake()
     {
-        base.Awake();
-
-                
+        base.Awake();       
     }
 
     public void GetEnemyList(GameObject[] _enemy)
@@ -30,22 +30,28 @@ public class EnemyManager : Singleton<EnemyManager>
         }
     }
          
-    private void Start()
+    public IEnumerator CreateEnemiesList()
     {
         mainCamera = Camera.main;
 
         // Lấy tất cả các đối tượng con trong EnemyManager và lưu chúng vào mảng enemies
         countListEnemy = enemySpawner.enemyCount;
         enemies = new GameObject[countListEnemy];
-        enemySpawner.SpawnEnemies();
+
+        // Bắt đầu spawn và đợi cho đến khi hoàn tất
+        yield return StartCoroutine(enemySpawner.SpawnEnemiesGradually());
+
+        // Bây giờ quá trình spawn đã hoàn tất, bạn có thể bắt đầu kiểm tra
+        checkEnemiesCoroutine = StartCoroutine(CheckEnemiesRoutine());
     }
 
-    private void Update()
+    private IEnumerator CheckEnemiesRoutine()
     {
-        if (Time.time >= nextCheckTime)
+        while (true)
         {
+            // Thực hiện kiểm tra enemy
             CheckEnemiesInCameraView();
-            nextCheckTime = Time.time + checkInterval;
+            yield return new WaitForSeconds(1f); // Đợi một khoảng thời gian trước khi lặp lại
         }
     }
 
@@ -86,5 +92,21 @@ public class EnemyManager : Singleton<EnemyManager>
                 }
             }
         }
+    }
+
+    // Hàm để dừng Coroutine
+    public void StopCheckEnemiesRoutine()
+    {
+        if (checkEnemiesCoroutine != null)
+        {
+            StopCoroutine(checkEnemiesCoroutine);
+            checkEnemiesCoroutine = null;
+        }
+    }
+
+    // Đảm bảo Coroutine dừng lại khi đối tượng bị hủy
+    private void OnDestroy()
+    {
+        StopCheckEnemiesRoutine();
     }
 }

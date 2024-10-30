@@ -12,7 +12,7 @@ public class MapManager : MonoBehaviour
     [SerializeField] private Transform parentTransform;
     private AsyncOperationHandle<GameObject> currentMapHandle; // Handle của map hiện tại
     private GameObject currentMapInstance; // Instance của map hiện tại
-
+    private IEnumerator instantiateCoroutine;
 
     public void LoadObjectAddressable(AssetReference mapAssetReference)
     {
@@ -24,7 +24,6 @@ public class MapManager : MonoBehaviour
 
         // Bắt đầu tải map mới với màn hình chờ
         AsyncOperationHandle<GameObject> handle = mapAssetReference.InstantiateAsync();
-
         StartCoroutine(LoadingManager.Instance.LoadWithProgress(handle));
         handle.Completed += AsyncOperationHandle_Completed;
     }
@@ -39,6 +38,7 @@ public class MapManager : MonoBehaviour
 
             // Lưu handle của map mới để sử dụng khi cần unload
             currentMapHandle = asyncOperationHandle;
+            //instantiateCoroutine = EnemyManager.Instance.CreateEnemiesList();
         }
         else
         {

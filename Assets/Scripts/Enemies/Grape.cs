@@ -9,13 +9,15 @@ public class Grape : MonoBehaviour, IEnemy
 
     private Animator animator;
     private SpriteRenderer spriteRenderer;
-
+    private GameObject _player;
     //public EnemyAttackData attackData;
 
     readonly int ATTACK_HASH = Animator.StringToHash("Attack");
 
+
     private void Awake()
     {
+        _player = GameObject.FindWithTag("Player");
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -24,7 +26,12 @@ public class Grape : MonoBehaviour, IEnemy
     {
         animator.SetTrigger(ATTACK_HASH);
 
-        if(transform.position.x - Character.Instance.transform.position.x < 0)
+        if (_player == null)
+        {
+            _player = GameObject.FindWithTag("Player");
+        }
+
+        if (transform.position.x - _player.transform.position.x < 0)
         {
             spriteRenderer.flipX = false;
         } else
@@ -35,7 +42,12 @@ public class Grape : MonoBehaviour, IEnemy
 
     public void SpawProjectileAnimEvent()
     {
-        Vector3 playerPos = Character.Instance.transform.position;
+        if (_player == null)
+        {
+            _player = GameObject.FindWithTag("Player");
+        }
+
+        Vector3 playerPos = _player.transform.position;
         GameObject bullet = ObjectPool.Instance.GetFromPool();
         bullet.GetComponent<SpriteRenderer>().sprite = bulletExclusionSto.SpriteBullet;
         bullet.transform.position = this.transform.position;

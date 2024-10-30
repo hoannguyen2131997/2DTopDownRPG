@@ -11,7 +11,7 @@ public class ActiveInventory : Singleton<ActiveInventory>
     protected override void Awake()
     {
         base.Awake();
-
+        
         gameInputSystemSingleton = GameObject.Find("Player").GetComponent<GameInputSystemSingleton>();
         if(gameInputSystemSingleton == null)
         {
@@ -45,7 +45,7 @@ public class ActiveInventory : Singleton<ActiveInventory>
 
         this.transform.GetChild(indexNum).GetChild(0).gameObject.SetActive(true);
 
-        ChangeActiveWeapon();
+        //ChangeActiveWeapon();
     }
 
     private void ChangeActiveWeapon()

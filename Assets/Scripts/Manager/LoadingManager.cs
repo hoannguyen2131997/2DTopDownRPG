@@ -45,12 +45,35 @@ public class LoadingManager : Singleton<LoadingManager>
     public IEnumerator LoadWithProgress(AsyncOperationHandle handle)
     {
         ShowLoadingScreen();
+
+        float currentProgress = 0f;
+        float targetProgress = 0f;
+        float progressSpeed = 0.2f; // Tốc độ điều chỉnh thanh tiến trình
+
         while (!handle.IsDone)
         {
-            UpdateProgressBar(handle.PercentComplete);
-            Debug.Log("handle.PercentComplete : " + handle.PercentComplete);
+            targetProgress = handle.PercentComplete; // Tiến trình thực tế
+            currentProgress = Mathf.MoveTowards(currentProgress, targetProgress, progressSpeed * Time.deltaTime);
+            UpdateProgressBar(currentProgress);
             yield return null;
         }
+
+        // Đảm bảo thanh tiến trình đạt 100% một cách mượt mà
+        while (currentProgress < .2f)
+        {
+            currentProgress = Mathf.MoveTowards(currentProgress, .2f, progressSpeed * Time.deltaTime);
+            UpdateProgressBar(currentProgress);
+
+
+            yield return null;
+        }
+
+        yield return EnemyManager.Instance.CreateEnemiesList();
+      
+        currentProgress = Mathf.MoveTowards(currentProgress, 1f, progressSpeed * Time.deltaTime);
+        UpdateProgressBar(currentProgress);
+        yield return null;
+
         HideLoadingScreen();
     }
 }

@@ -39,7 +39,7 @@ public class SwordPlayer : MonoBehaviour, IWeapon
         weaponCollider = Character.Instance.GetWeaponCollider();
        
         inputPlayer = gameInputSystemSingleton.GetMovementVectorNormalized();
-        eventsPlayerManager.OnBlockControlPlayer += GetBlockControl;
+        //eventsPlayerManager.OnBlockControlPlayer += GetBlockControl;
     }
 
     private void GetBlockControl(object sender, OnBlockControlPlayerEventArgs e)

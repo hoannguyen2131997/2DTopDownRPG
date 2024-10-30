@@ -120,5 +120,7 @@ public class StandingState : State
         public const string _vertical = "Vertical";
         public const string _lastHorizontal = "LastHorizontal";
         public const string _lastVertical = "LastVertical";
+        public const string _InputX = "InputX";
+        public const string _InputY = "InputY";
     }
 }

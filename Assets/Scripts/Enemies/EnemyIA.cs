@@ -23,6 +23,7 @@ public class EnemyIA : MonoBehaviour
     private float timeRoaming = 0f;
     private State state;
     private EnemyPathFinding enemyPathFinding;
+    private GameObject _player;
 
     public int GetCollisionDamage()
     {
@@ -30,6 +31,7 @@ public class EnemyIA : MonoBehaviour
     }
     private void Awake()
     {
+        _player = GameObject.FindWithTag("Player");
         enemyPathFinding = GetComponent<EnemyPathFinding>();
         state = State.Roaming;
     }
@@ -60,7 +62,12 @@ public class EnemyIA : MonoBehaviour
 
         enemyPathFinding.MoveTo(roamPosition);
 
-        if(Vector2.Distance(transform.position, Character.Instance.transform.position) < attackRange) {
+        if(_player == null)
+        {
+            _player = GameObject.FindWithTag("Player");
+        }
+
+        if (Vector2.Distance(transform.position, _player.transform.position) < attackRange) {
             state = State.Attacking;
         }
 
@@ -72,7 +79,12 @@ public class EnemyIA : MonoBehaviour
 
     private void Attacking()
     {
-        if(Vector2.Distance(transform.position, Character.Instance.transform.position) > attackRange)
+        if (_player == null)
+        {
+            _player = GameObject.FindWithTag("Player");
+        }
+
+        if (Vector2.Distance(transform.position, _player.transform.position) > attackRange)
         {
             state = State.Roaming;
         }

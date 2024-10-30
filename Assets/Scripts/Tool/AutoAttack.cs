@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class AutoAttack : MonoBehaviour
 {
     private PlayerController playerController;
@@ -22,16 +23,22 @@ public class AutoAttack : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        // Get weapon
-        swordPlayer = GameObject.FindObjectOfType<SwordPlayer>();
-    }
-
     void OnTriggerStay2D(Collider2D collision)
     {
+       
         if (collision.CompareTag("Enemy") && Time.time - lastAttackTime > attackCooldown)
         {
+            // Nếu SwordPlayer chưa được gán, tìm nó
+            if (swordPlayer == null)
+            {
+                swordPlayer = GameObject.FindObjectOfType<SwordPlayer>();
+                if (swordPlayer == null)
+                {
+                    Debug.LogWarning("SwordPlayer vẫn chưa được tạo!");
+                    return; // Không làm gì nếu SwordPlayer chưa được tạo
+                }
+            }
+
             swordPlayer.Attack();
             lastAttackTime = Time.time;
         }

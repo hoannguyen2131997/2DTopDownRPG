@@ -6,6 +6,7 @@ public class GrapeProjectile : MonoBehaviour
     private Transform shadow;
     private Color initialColor;
     private Renderer renderer;
+    private GameObject _player;
     public float DamageToPlayer {  get; private set; }
 
     public void Initialize(BulletExclusion data)
@@ -22,8 +23,8 @@ public class GrapeProjectile : MonoBehaviour
         {
             initialColor = renderer.material.color;
         }
-
-        Vector3 playerPos = Character.Instance.transform.position;
+        _player = GameObject.FindWithTag("Player");
+        Vector3 playerPos = _player.transform.position;
         Vector3 grapeShadowStartPostion = shadow.transform.position;
 
         StartCoroutine(ProjectileCurveRoutine(this.transform.position, playerPos, data));
